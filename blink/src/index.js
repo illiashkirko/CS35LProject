@@ -12,7 +12,6 @@ root.render(
 );
 
 class InputBox extends React.Component {
-<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -37,14 +36,6 @@ class InputBox extends React.Component {
           <textarea value={this.state.value} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Tweet" />
-=======
-  render() {
-    return (
-      <form>
-        <label>
-          <input type="text" /> 
-        </label>
->>>>>>> ca3c8fd85b880477522cb62921056399e68d8d15
       </form>
     );
   }
