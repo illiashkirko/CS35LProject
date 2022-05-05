@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Table from './Table'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -11,33 +12,66 @@ root.render(
   </React.StrictMode>
 );
 
+
 class InputBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {
+      textValue: Array(0).fill(null),
+      value:''
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
+  handleChange(event) {    
+    this.setState(
+      {
+        value: event.target.value
+       // textValue: this.state.textValue
+      }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+    );
   }
 
   handleSubmit(event) {
-    alert('You tweeted ' + this.state.value);
+    const textValue = this.state.textValue.slice();
+    textValue.push(this.state.value);
+    this.setState(
+      {
+        value: null,
+        textValue: textValue
+      }
+
+    );
     document.getElementById('tweetInput').value = '';
     event.preventDefault();
   }
+   inputBox(){
+<form onSubmit={this.handleSubmit}>
+        <label>
+          <input id ="tweetInput" type="text" value={this.state.value} onChange={this.handleChange} />
+          <input type="submit" value="Tweet" />
+        </label> 
+        </form>
+   }
 
   render() {
     return (
+      <>
       <form onSubmit={this.handleSubmit}>
         <label>
           <input id ="tweetInput" type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Tweet" />
-      </form>
+          <input type="submit" value="Tweet" />
+        </label> 
+        </form>
+      
+        <Table value={this.state.textValue}/>
+
+     
+
+      </>
     );
   }
 }
