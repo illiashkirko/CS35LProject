@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:rgb(128, 215, 244);
 }
 
 code {
@@ -19,8 +20,7 @@ form{
   transform:translate(-50%,-50%);
 }
 
-textarea {
-  resize: none;
+#tweetInput {
   width:350px;
   height:100px;
   background-color:none;

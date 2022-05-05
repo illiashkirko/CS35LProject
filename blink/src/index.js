@@ -26,6 +26,7 @@ class InputBox extends React.Component {
 
   handleSubmit(event) {
     alert('You tweeted ' + this.state.value);
+    document.getElementById('tweetInput').value = '';
     event.preventDefault();
   }
 
@@ -33,7 +34,7 @@ class InputBox extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          <textarea value={this.state.value} onChange={this.handleChange} />
+          <input id ="tweetInput" type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Tweet" />
       </form>
