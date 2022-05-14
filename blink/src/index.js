@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Table from './Table'
+import axios from 'axios'
+
+const backEndConnect= axios.create({
+  baseURL : 'http://localhost:5000'
+}) 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,12 +19,24 @@ root.render(
 
 
 class InputBox extends React.Component {
+  state = {
+    messages: [],
+    textValue: Array(0).fill(null),
+    value:''
+  };
+
   constructor(props) {
     super(props);
-    this.state = {
-      textValue: Array(0).fill(null),
-      value:''
-    };
+    backEndConnect.get('/messages/').then(res =>{
+      this.setState(
+        { 
+           messages: res.data,
+            textValue: res.data.map(d => d.userMessages)
+        }
+        )
+
+    })
+  
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,6 +50,7 @@ class InputBox extends React.Component {
       }
 
     );
+
   }
 
   handleSubmit(event) {
