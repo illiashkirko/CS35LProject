@@ -24,7 +24,7 @@ const messageRouter= require('./routes/messages')
 
 blinkApp.use('/messages', messageRouter);
 
-application.listen(port, ()=> {
+blinkApp.listen(port, ()=> {
 
     console.log(`port: ${port}`)
 });

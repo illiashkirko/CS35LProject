@@ -4,7 +4,7 @@ let Messages= require('../models/messages.model')
 router.route('/').get((reg, res) => {
     Messages.find()
     .then(messages => res.json(messages))
-    .cat(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(400).json('Error: ' + err));
 
 });
 

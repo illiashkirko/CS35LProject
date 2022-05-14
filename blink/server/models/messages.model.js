@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const messagesSchema = new Schema({
     userMessages:{ type: String, required: true },
-    numberOfLikes: {type:Number, required: true}
+    numberOfLikes: {type:String, required: true},
 }, {
     timestamps:true,
 });
