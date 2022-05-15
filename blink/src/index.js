@@ -27,17 +27,6 @@ class InputBox extends React.Component {
 
   constructor(props) {
     super(props);
-    backEndConnect.get('/messages/').then(res =>{
-      this.setState(
-        { 
-           messages: res.data,
-            textValue: res.data.map(d => d.userMessages)
-        }
-        )
-
-    })
-  
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -56,13 +45,22 @@ class InputBox extends React.Component {
   handleSubmit(event) {
     const textValue = this.state.textValue.slice();
     textValue.push(this.state.value);
+    const message ={ 
+      userMessages : this.state.value,
+      numberOfLikes : "5"
+    }
+    backEndConnect.post('/messages/add', message).
+    then(res => console.log(res.data));
     this.setState(
       {
         value: null,
         textValue: textValue
       }
+      
 
     );
+
+    
     document.getElementById('tweetInput').value = '';
     event.preventDefault();
   }
@@ -76,6 +74,15 @@ class InputBox extends React.Component {
    }
 
   render() {
+    backEndConnect.get('/messages/').then(res =>{
+      this.setState(
+        { 
+           messages: res.data,
+            textValue: res.data.map(d => d.userMessages)
+        }
+        )
+
+    })
     return (
       <>
       <form onSubmit={this.handleSubmit}>
