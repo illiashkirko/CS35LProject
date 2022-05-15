@@ -15,7 +15,7 @@ const Table = ({value}) => {
                 <tr key={valueM}>
                     <td>{valueM}</td>
                     <td>
-                    <button type="button"> <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Facebook_Like_button.svg" height ="10" width="10" /></button>
+                    <button id = "like-button" type="button"> <img id = "like-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Facebook_Like_button.svg/1024px-Facebook_Like_button.svg.png" width="20em"/></button>
                     </td>
                     <td></td>
   

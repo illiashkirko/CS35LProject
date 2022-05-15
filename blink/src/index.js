@@ -21,21 +21,20 @@ root.render(
 class InputBox extends React.Component {
   state = {
     messages: [],
-    textValue: Array(0).fill(null),
-    value:''
+    textValue: Array(0).fill(null), // array of messages
+    value:''                        // value of current message in text box
   };
 
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this); // handleChange handles when the textbox changes
+    this.handleSubmit = this.handleSubmit.bind(this); // handles when you click the submit button 
   }
   
   handleChange(event) {    
     this.setState(
       {
-        value: event.target.value
-       // textValue: this.state.textValue
+        value: event.target.value         // update current value
       }
 
     );
@@ -43,29 +42,33 @@ class InputBox extends React.Component {
   }
 
   handleSubmit(event) {
-    const textValue = this.state.textValue.slice();
-    textValue.push(this.state.value);
+    const textValue = this.state.textValue.slice(); // copy array into textValue
+    textValue.unshift(this.state.value);            // adds new val to array
+    //backend
     const message ={ 
       userMessages : this.state.value,
       numberOfLikes : "5"
     }
     backEndConnect.post('/messages/add', message).
     then(res => console.log(res.data));
+
+    // todo
     this.setState(
       {
-        value: null,
-        textValue: textValue
+        value: null,            // sets the textbox as empty
+        textValue: textValue    // updates the array of messages
       }
       
 
     );
 
     
-    document.getElementById('tweetInput').value = '';
+    document.getElementById('tweetInput').value = '';   // sets the textbox to empty
     event.preventDefault();
   }
+    // when you submit calls handleSubmit
    inputBox(){
-<form onSubmit={this.handleSubmit}>
+<form onSubmit={this.handleSubmit}>    
         <label>
           <input id ="tweetInput" type="text" value={this.state.value} onChange={this.handleChange} />
           <input type="submit" value="Tweet" />

@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color:rgb(128, 215, 244);
+  background-color:rgb(47,49,55);
 }
 
 code {
@@ -23,10 +23,13 @@ form{
 #tweetInput {
   width:350px;
   height:100px;
-  background-color:none;
+  background-color: rgb(47,49,55);
+  border:none;
+  outline:none;
 }
 
 .messages{
+  color:antiquewhite;
   position:absolute;
   top:32%;
   left:45%;
@@ -49,4 +52,16 @@ form{
 .center {
 
 }
+#like-button{
+  background-color: transparent;
+  border: none;
+}
+#like-button:hover{
+  background-color: white;
+  border: none;
+}
 
+#like-icon{
+  padding:0%;
+  border: none;
+}
