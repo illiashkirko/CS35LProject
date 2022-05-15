@@ -27,21 +27,10 @@ form{
 }
 
 .messages{
-  display: flex;
-  position: relative;
-
-  top: 240px;
-  justify-content: center;
-  object-position: bottom;
+  position:absolute;
+  top:32%;
+  left:45%;
   align-items: center;
-  margin-left: 30px;
-  margin-right: 30px;
-  border-spacing: 10px;
-
-  flex-direction: column;
-  font-family: Arial;
-  background-color: blue;
-
 }
 .form{
   display: flex;
