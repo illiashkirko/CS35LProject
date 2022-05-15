@@ -5,7 +5,7 @@ let Messages= require('../models/messages.model')   //connecting to messages mod
 router.route('/').get((reg, res) => {
     Messages.find()                             //method that gets all messages from the database
     .then(messages => res.json(messages))       //returns all the messages in JSON format
-    .cat(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(400).json('Error: ' + err));
 
 });
 
