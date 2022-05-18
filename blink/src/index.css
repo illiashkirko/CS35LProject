@@ -21,19 +21,47 @@ form{
 }
 
 #tweetInput {
-  width:350px;
+  width: 350px;
   height:100px;
+  color: white;
   background-color: rgb(47,49,55);
+  /* border:white 0.1em solid; */
   border:none;
   outline:none;
 }
 
-.messages{
-  color:antiquewhite;
+#tweetButton{
+  background-color: rgb(47,49,55);
+  border: white 0.001em solid;
+  color: white;
+  border-radius: 5px;
+}
+#tweetButton:hover{
+  background-color: white;
+  border: white 0.001em solid;
+  color: rgb(47,49,55);
+  border-radius: 5px;
+}
+
+#messageTable{
+  color:antiquewhite;  
   position:absolute;
   top:32%;
-  left:45%;
+  left:37.8%;
   align-items: center;
+  border-color: white;
+  border-width: 0.001em;
+  border-style: solid solid solid solid;
+  width:357.5px;
+  border-collapse: collapse;
+}
+/* td{
+  border:greenyellow 0.1em solid;
+} */
+tr{
+  border-color: white;
+  border-width: 0.01em;
+  border-style: solid solid solid solid;
 }
 .form{
   display: flex;
@@ -49,13 +77,14 @@ form{
 
 
 }
-.center {
+/* .center {
 
-}
+} */
 #like-button{
   background-color: transparent;
   border: none;
 }
+
 #like-button:hover{
   background-color: white;
   border: none;
@@ -63,5 +92,9 @@ form{
 
 #like-icon{
   padding:0%;
-  border: none;
+}
+
+#votingData{
+  text-align: right;
+  margin: none;
 }

@@ -70,13 +70,13 @@ class InputBox extends React.Component {
    inputBox(){
 <form onSubmit={this.handleSubmit}>    
         <label>
-          <input id ="tweetInput" type="text" value={this.state.value} onChange={this.handleChange} />
-          <input type="submit" value="Tweet" />
+          <input id="tweetInput" type="text" value={this.state.value} onChange={this.handleChange} />
+          <input id="tweetButton" type="submit" value="Link" />
         </label> 
-        </form>
+        </form>  
    }
 
-  render() {
+  render() { 
     backEndConnect.get('/messages/').then(res =>{
       this.setState(
         { 
@@ -90,11 +90,11 @@ class InputBox extends React.Component {
       <>
       <form onSubmit={this.handleSubmit}>
         <label>
-          <input id ="tweetInput" type="text" value={this.state.value} onChange={this.handleChange} />
-          <input type="submit" value="Tweet" />
+          <input id ="tweetInput" placeholder="What's on your mind?" type="text" value={this.state.value} onChange={this.handleChange} />
+          <input id="tweetButton" type="submit" value="Link" />
         </label> 
         </form>
-      
+        <br></br>
         <Table value={this.state.textValue}/>
 
      
