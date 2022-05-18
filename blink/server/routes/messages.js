@@ -14,11 +14,13 @@ router.route('/add').post((req,res) => {
     //extracting data from request
     const userMessages = req.body.userMessages;
     const numberOfLikes = req.body.numberOfLikes;
+    ///const timeK = req.body.time;
 
     //creating new message based on data
     const newMessage = new Messages({
         userMessages,
-        numberOfLikes,
+        numberOfLikes
+        ///timeK,
     });
 
     //saving message on db

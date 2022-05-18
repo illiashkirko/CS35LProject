@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Table from './Table'
 import axios from 'axios'
 
+
 const backEndConnect= axios.create({
   baseURL : 'http://localhost:5000'
 }) 
@@ -20,9 +21,8 @@ root.render(
 
 class InputBox extends React.Component {
   state = {
-    messages: [],
-    textValue: Array(0).fill(null), // array of messages
-    value:''                        // value of current message in text box
+    value:'',                           // value of current message in text box
+    textValue: []
   };
 
   constructor(props) {
@@ -36,55 +36,43 @@ class InputBox extends React.Component {
       {
         value: event.target.value         // update current value
       }
-
     );
 
   }
 
   handleSubmit(event) {
-    const textValue = this.state.textValue.slice(); // copy array into textValue
-    textValue.unshift(this.state.value);            // adds new val to array
     //backend
-    const message ={ 
+    const message = { 
       userMessages : this.state.value,
-      numberOfLikes : "5"
+      numberOfLikes : 0,
+      ///timeK: Date().toString(),
     }
     backEndConnect.post('/messages/add', message).
     then(res => console.log(res.data));
 
-    // todo
     this.setState(
       {
-        value: null,            // sets the textbox as empty
-        textValue: textValue    // updates the array of messages
+        value: ''            // sets the textbox as empty
       }
-      
-
     );
 
-    
     document.getElementById('tweetInput').value = '';   // sets the textbox to empty
     event.preventDefault();
   }
     // when you submit calls handleSubmit
-   inputBox(){
-<form onSubmit={this.handleSubmit}>    
+  inputBox() {
+  <form onSubmit={this.handleSubmit}>    
         <label>
           <input id="tweetInput" type="text" value={this.state.value} onChange={this.handleChange} />
           <input id="tweetButton" type="submit" value="Link" />
         </label> 
         </form>  
-   }
+  }
 
   render() { 
-    backEndConnect.get('/messages/').then(res =>{
-      this.setState(
-        { 
-           messages: res.data,
-            textValue: res.data.map(d => d.userMessages)
-        }
-        )
-
+    
+    backEndConnect.get('/messages/').then(res => {
+      this.setState({ textValue: res.data.map(d => [d.userMessages, d.numberofLikes, d._id])})
     })
     return (
       <>
@@ -97,12 +85,11 @@ class InputBox extends React.Component {
         <br></br>
         <Table value={this.state.textValue}/>
 
-     
-
       </>
     );
   }
 }
+
 
 root.render(<InputBox />);
 
