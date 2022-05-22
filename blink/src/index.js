@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Table from './Table'
+//import Table from './Table'
 import axios from 'axios'
-
 
 const backEndConnect= axios.create({
   baseURL : 'http://localhost:5000'
@@ -18,6 +17,40 @@ root.render(
   </React.StrictMode>
 );
 
+function handleClick(event) {
+  const message = { 
+    _id: event[3],
+    userMessages : event[0],
+    numberOfLikes : event[1] + 1,
+    timeK: event[2],
+  }
+  backEndConnect.post('/messages/update/'+event[3], message);
+}
+
+const Table = ({value}) => {
+  return (
+      <>
+  <table id="messageTable" >
+      <tbody>
+          {value.map(value =>(
+              
+              <tr key={value[3]}>
+                  <td>{value[0]}</td>
+                  <td id="votingData">
+                  <button id = "like-button" type="button" onClick={()=>handleClick(value)}> <img id = "like-icon" alt="like button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Facebook_Like_button.svg/1024px-Facebook_Like_button.svg.png" width="20em"/></button>
+                  </td>
+                  <td>
+                      {value[1] }
+                  </td>
+              </tr>
+          ))}
+          
+          </tbody>
+
+  </table>
+  </>
+  )
+}
 
 class InputBox extends React.Component {
   state = {
@@ -45,7 +78,7 @@ class InputBox extends React.Component {
     const message = { 
       userMessages : this.state.value,
       numberOfLikes : 0,
-      ///timeK: Date().toString(),
+      timeK: Date.now(),
     }
     backEndConnect.post('/messages/add', message).
     then(res => console.log(res.data));
@@ -59,6 +92,8 @@ class InputBox extends React.Component {
     document.getElementById('tweetInput').value = '';   // sets the textbox to empty
     event.preventDefault();
   }
+  
+
     // when you submit calls handleSubmit
   inputBox() {
   <form onSubmit={this.handleSubmit}>    
@@ -70,9 +105,9 @@ class InputBox extends React.Component {
   }
 
   render() { 
-    
+    //backEndConnect.delete('/messages/'); // deletes all messages
     backEndConnect.get('/messages/').then(res => {
-      this.setState({ textValue: res.data.map(d => [d.userMessages, d.numberofLikes, d._id])})
+      this.setState({ textValue: res.data.map(d => [d.userMessages, d.numberOfLikes, d.timeK, d._id])})
     })
     return (
       <>
