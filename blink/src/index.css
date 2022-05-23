@@ -14,15 +14,19 @@ code {
 }
 
 form{
-  position:absolute;
-  top:25%;
-  left:50%;
-  transform:translate(-50%,-50%);
+  position: relative;
+  top:5vh;
+  left:25vw;
+  width:55vw;
 }
+/* #tweetContainer{
+  width:50vw;
+  height:10vh;
+} */
 
 #tweetInput {
-  width: 350px;
-  height:100px;
+  width: 44vw;
+  height:10vw;
   color: white;
   background-color: rgb(47,49,55);
   /* border:white 0.1em solid; */
@@ -31,6 +35,8 @@ form{
 }
 
 #tweetButton{
+  width: 5vw;
+  height: 2vh;
   background-color: rgb(47,49,55);
   border: white 0.001em solid;
   color: white;
@@ -45,14 +51,14 @@ form{
 
 #messageTable{
   color:antiquewhite;  
-  position:absolute;
-  top:32%;
-  left:37.8%;
+  position:relative;
+  top: 8vh;
+  left:25vw;
   align-items: center;
   border-color: white;
   border-width: 0.001em;
   border-style: solid solid solid solid;
-  width:357.5px;
+  width:50vw;
   border-collapse: collapse;
 }
 /* td{

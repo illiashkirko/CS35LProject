@@ -97,7 +97,7 @@ class InputBox extends React.Component {
     // when you submit calls handleSubmit
   inputBox() {
   <form onSubmit={this.handleSubmit}>    
-        <label>
+        <label id="tweetContainer">
           <input id="tweetInput" type="text" value={this.state.value} onChange={this.handleChange} />
           <input id="tweetButton" type="submit" value="Link" />
         </label> 
