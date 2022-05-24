@@ -1,0 +1,74 @@
+/* Bordered form */
+.loginform {
+    border: 3px solid #555555;
+  }
+  
+  /* Full-width inputs */
+  input[type=text], input[type=password] {
+    color:rgb(0, 0, 0);
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Set a style for all buttons */
+  .loginbutton {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  /* Add a hover effect for buttons */
+  .loginbutton:hover {
+    opacity: 0.8;
+  }
+  
+  /* Extra style for the cancel button (red) */
+  .logincancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  /* Add padding to containers */
+  .logincontainer {
+    padding: 16px;
+  }
+  
+  /* The "Forgot password" text */
+  span.psw {
+    color: rgb(163, 163, 163);
+    float: right;
+    padding-top: 16px;
+  }
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+    .cancelbtn {
+      width: 100%;
+    }
+  }
+
+.logintext{
+    color:azure;
+  }
+#link{
+    text-decoration: none;
+    color:rgb(163, 163, 163);
+}
+#link:hover{
+    color:rgb(127, 214, 255);
+}
+#link:active{
+    color:rgb(21, 86, 252);
+}

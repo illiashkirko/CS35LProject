@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './home.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios'
@@ -11,11 +11,7 @@ function Home()
         baseURL : 'http://localhost:5008'
       }) 
       const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
-    );
+
     function handleClick(event) {
         const message = { 
           _id: event[3],
@@ -90,18 +86,6 @@ function Home()
       
           document.getElementById('tweetInput').value = '';   // sets the textbox to empty
           event.preventDefault();
-        }
-        
-      
-          // when you submit calls handleSubmit
-        inputBox() {
-        <form onSubmit={this.handleSubmit}>    
-              <label id="tweetContainer">
-                <input id="tweetInput" type="text" value={this.state.value} onChange={this.handleChange} />
-                <input id="tweetButton" type="submit" value="Link" />
-
-              </label> 
-              </form>  
         }
       
         render() { 
