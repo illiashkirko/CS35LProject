@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-form{
+#inputForm{
   position: relative;
   top:5vh;
   left:25vw;
@@ -57,31 +57,13 @@ form{
   width:50vw;
   border-collapse: collapse;
 }
-/* td{
-  border:greenyellow 0.1em solid;
-} */
+
 tr{
   border-color: white;
   border-width: 0.01em;
   border-style: solid solid solid solid;
 }
-.form{
-  display: flex;
-  background-color: black;
 
-  border-radius: 5px;
-  justify-content: center;
-  object-position: bottom;
-  align-items: center;
-  flex-direction: column;
-  font-family: Arial;
-  background-color: aliceblue;
-
-
-}
-/* .center {
-
-} */
 #like-button{
   background-color: transparent;
   border: none;
