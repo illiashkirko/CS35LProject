@@ -41,41 +41,17 @@ function Login() {
   alert("Wrong Password!");
   }
 
- 
 };
 
-
-
   return (   
-    <>
-    <form class="loginform" onSubmit= {handleSubmit(onSubmit)}>
-      <div class="logincontainer">
-        <label for="uname" class="logintext"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" {...register("UserName")}></input>
-    
-        <label for="psw" class="logintext"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" {...register("Password")}></input>
-            
-        <button type="submit" class="logintext loginbutton">Login</button>
-        <label class="logintext">
-          <input type="checkbox" name="remember"></input>Remember me
-        </label>
-      </div>
-      <div class="logincontainer">
-        <button type="button" class="logincancelbtn loginbutton">Cancel</button>
-        <span class="psw">Forgot <a id="link" href="./">password?</a></span>
-      </div>
-    </form>
-    </>
-    );
   <>
-  <form class="loginform">
+  <form class="loginform" onSubmit = {handleSubmit(onSubmit)}>
     <div class="logincontainer">
       <label for="uname" class="logintext"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname"></input>
+      <input type="text" placeholder="Enter Username" name="uname"{...register("UserName")}></input>
   
       <label for="psw" class="logintext"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw"></input>
+      <input type="password" placeholder="Enter Password" name="psw"{...register("Password")}></input>
       <button type="submit" class="logintext loginbutton">Login</button>
       <label class="logintext">
         <input type="checkbox" name="remember"></input>Remember me
@@ -90,6 +66,7 @@ function Login() {
     </div>
   </form>
   </>
+  );
 }
 
 export default Login;
