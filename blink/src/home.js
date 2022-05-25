@@ -21,6 +21,60 @@ function Home()
         }
         backEndConnect.post('/messages/update/'+event[3], message);
       }
+
+      class CommentTable extends React.Component {
+        state = {
+          value:'',                           // value of current message in text box
+        };
+
+        constructor(props) {
+          super(props);
+      
+          this.handleChange = this.handleChange.bind(this);
+          this.handleSubmit = this.handleSubmit.bind(this);
+        }
+      
+        handleChange(event) {
+          this.setState({value: event.target.value});
+        }
+      
+        handleSubmit(event) {
+          console.log(this);
+          // Find a <table> element with id="myTable":
+          var table = this.refs.myTable;
+
+          // Create an empty <tr> element and add it to the 1st position of the table:
+          var row = table.insertRow(1);
+
+          // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+          var cell1 = row.insertCell(0);
+
+          // Add some text to the new cells:
+          cell1.innerHTML = this.state.value;
+
+          console.log(this.state.value);
+          this.state.value = "";
+          event.preventDefault();
+        }
+      
+        render() {
+          return (
+            <>
+            <table ref="myTable">
+              <tbody>
+              <tr>
+                <td onSubmit={this.handleSubmit}>
+                  <form onSubmit={this.handleSubmit}>
+                  <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                  </form>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            </>
+          );
+        }
+      }
       
       const Table = ({value}) => {
         return (
@@ -29,15 +83,19 @@ function Home()
             <tbody>
                 {value.map(value =>(
                     
-                    <tr key={value[3]}>
-                        <td>{value[0]}</td>
-                        <td id="votingData">
-                        <button id = "like-button" type="button" onClick={()=>handleClick(value)}> <img id = "like-icon" alt="like button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Facebook_Like_button.svg/1024px-Facebook_Like_button.svg.png" width="20em"/></button>
-                        </td>
-                        <td>
-                            {value[1] }
-                        </td>
-                    </tr>
+                    <><tr key={value[3]}>
+                    <td>{value[0]}</td>
+                    <td id="votingData">
+                      <button id="like-button" type="button" onClick={() => handleClick(value)}> <img id="like-icon" alt="like button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Facebook_Like_button.svg/1024px-Facebook_Like_button.svg.png" width="20em" /></button>
+                    </td>
+                    <td>
+                      {value[1]}
+                    </td>
+                  </tr>
+                  {/* this row contains the table of comments */}
+                  <tr key="commentsRow">
+                      <td> <CommentTable /></td>
+                    </tr></>
                 ))}
                 
                 </tbody>
@@ -95,7 +153,7 @@ function Home()
           })
           return (
             <>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} id="inputForm">
               <label>
                 <input id ="tweetInput" placeholder="What's on your mind?" type="text" value={this.state.value} onChange={this.handleChange} />
                 <input id="tweetButton" type="submit" value="Link" />
