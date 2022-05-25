@@ -16,7 +16,7 @@ function Login() {
         <input type="checkbox" name="remember"></input>Remember me
       </label>
     </div>
-    <div class="logincontainer">
+    <div class="logincontainer logincontainer2">
       <button type="button" class="logincancelbtn loginbutton">Cancel</button>
       <ul class="psw">
         <li class="loginli"><i><b>Need an account? </b></i><a id="link" href=''><u>SIGN UP</u></a></li>
