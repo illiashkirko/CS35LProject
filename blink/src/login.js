@@ -11,7 +11,6 @@ function Login() {
   
       <label for="psw" class="logintext"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw"></input>
-          
       <button type="submit" class="logintext loginbutton">Login</button>
       <label class="logintext">
         <input type="checkbox" name="remember"></input>Remember me
@@ -19,7 +18,10 @@ function Login() {
     </div>
     <div class="logincontainer">
       <button type="button" class="logincancelbtn loginbutton">Cancel</button>
-      <span class="psw">Forgot <a id="link" href="./">password?</a></span>
+      <ul class="psw">
+        <li class="loginli"><i><b>Need an account? </b></i><a id="link" href=''><u>SIGN UP</u></a></li>
+        <li class="loginli"><a id="link" href="./">Forgot password?</a></li>
+      </ul>
     </div>
   </form>
   </>
