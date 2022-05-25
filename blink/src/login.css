@@ -36,9 +36,10 @@
   
   /* Extra style for the cancel button (red) */
   .logincancelbtn {
-    width: auto;
     padding: 10px 18px;
+    width: auto;
     background-color: #f44336;
+    justify-content: center;
   }
   /* Add padding to containers */
   .logincontainer {
@@ -85,4 +86,13 @@
 }
 #link:active{
     color:rgb(21, 86, 252);
+}
+.loginneedacc{
+    color:blue;
+}
+
+.loginli {
+    float: right; 
+    clear: right; 
+    list-style-type: none;
 }
