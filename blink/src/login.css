@@ -1,6 +1,10 @@
 /* Bordered form */
 .loginform {
-    border: 3px solid #555555;
+    border: 1px solid #a5a5a5;
+    position: relative;
+    top:5vh;
+    left:25vw;
+    width:55vw;
   }
   
   /* Full-width inputs */
@@ -40,19 +44,29 @@
   .logincontainer {
     padding: 16px;
   }
+  .logincontainer2{
+      border: 1px solid #959595;
+  }
   
   /* The "Forgot password" text */
-  span.psw {
+  ul.psw {
+    font-size: 14px;
     color: rgb(163, 163, 163);
     float: right;
-    padding-top: 16px;
+    padding-top: 0px;
   }
   
   /* Change styles for span and cancel button on extra small screens */
-  @media screen and (max-width: 300px) {
-    span.psw {
+  @media screen and (max-width: 400px) {
+    ul.psw {
       display: block;
       float: none;
+      font-size:10px;
+      padding-top:16px;
+    }
+    .signup{
+        display:block;
+        float:none;
     }
     .cancelbtn {
       width: 100%;
