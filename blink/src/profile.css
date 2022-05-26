@@ -1,0 +1,65 @@
+#profheader{
+    color: white;
+    border: 2px solid none;
+}
+#profdata{
+    border: 2px solid orange;
+    border-radius: 15px;
+    width: 40vw;
+    margin: auto;
+}
+#divusername{
+    /* border: 2px solid red; */
+}
+#profusername{
+    /* border: 2px solid greenyellow; */
+    text-align: center;
+    vertical-align: top;
+    font-size: 200%;
+    font-family: "Trattoria","Lucida Handwriting", "Comic Sans", cursive;
+    margin:0px;
+}
+#profusercontainer{
+    /* border: 2px solid white; */
+    width:50%;
+    margin:0px;
+}
+/* #flist .flistitem{
+    display: inline;
+}
+#flist{
+    border: 1px solid hotpink;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content:space-around;
+}
+.flistitem{
+    border: 1px solid pink;
+    display: block;
+    text-align: center;
+} */
+#fdata{
+    /* border: 1px solid hotpink; */
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+#profnums{
+    /* border: 2px solid rebeccapurple; */
+    margin:0;
+}
+#profbio{
+    /* border: 2px solid #2774ae; */
+    padding: 10px;
+}
+#biodata{
+    /* border: 2px solid aqua; */
+    text-align: center;
+}
+hr{
+    width: 75%;
+    text-align: center;
+}
