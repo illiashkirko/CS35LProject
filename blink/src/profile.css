@@ -63,3 +63,45 @@ hr{
     width: 75%;
     text-align: center;
 }
+.backHome{
+    background-color: transparent;
+    border: none;
+    font-family: cursive;
+    font-size: 200%;
+    display:inline;
+    color:white;
+    transition: all 0.5s ease;
+    transform: scale(1);
+    margin:0.2%
+}
+.backHome:hover{
+    color:orange;
+    cursor: pointer;
+    transform: scale(1.25);
+    filter: brightness(120%);  
+}
+#profform{
+    /* border: 2px solid aquamarine; */
+    display: inline;
+}
+#profuserfollow{
+    width: 100%;
+}
+#proffbuttond{
+    text-align: center;
+}
+#proffbutton{
+    background-color: orange;
+    border: 1px solid rgb(47,49,55);
+    border-radius: 3px;
+    color: rgb(47,49,55);
+    transition: all 0.5s ease;
+    transform: scale(1);
+}
+#proffbutton:hover{
+    cursor: pointer;
+    transform: scale(1.25);
+    filter: brightness(120%);  
+}
+
+
