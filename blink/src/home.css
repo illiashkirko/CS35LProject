@@ -12,6 +12,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#searchInput{
+  width:44vw;
+  background-color: rgb(47,49,55);
+  border-radius:5px;
+  font-size: 1.5vh;
+}
+
+#searchButton{
+  font-weight:bold;
+  font-size: 60%;
+  width:6vw;
+  height:3vh;
+  background-color:rgb(47,49,55);
+  color:white;
+  border-color:white;
+  border-width: 1px;
+  border-radius: 4px;
+}
+#searchButton:hover{
+    background-color: white;
+    border: white 0.001em solid;
+    color: rgb(47,49,55);
+    border-radius: 5px;
+}
 
 #inputForm{
   position: relative;
@@ -26,12 +50,15 @@ code {
   color: white;
   background-color: rgb(47,49,55);
   /* border:white 0.1em solid; */
-  border-radius: 15px;
+  border-radius: 5px;
   outline:none;
+  font-size:1.6vh;
 }
 
 #tweetButton{
-  width: 5vw;
+  font-weight:bold;
+  font-size:60%;
+  width: 6vw;
   height: 3vh;
   background-color: rgb(47,49,55);
   border: white 0.001em solid;
@@ -46,10 +73,10 @@ code {
 }
 
 #buttonLikes{
-  position: absolute;
-  left: 30%;
-  top: 32%;
-  height: 3vh;
+  position: relative;
+  left:30vw;
+  top: 7vh;
+  width: 15vw;
   font-weight: bold;
   background-color: rgb(180, 188, 214);
   border: white 0.001em solid;
@@ -58,10 +85,10 @@ code {
 }
 
 #buttonTime{
-  position: absolute;
-  left: 65%;
-  top: 32%;
-  height: 3vh;
+  position: relative;
+  left:40vw;
+  top: 7vh;
+  width: 15vw;
   font-weight: bold;
   background-color: rgb(180, 188, 214);
   border: white 0.001em solid;
@@ -71,6 +98,7 @@ code {
 
 
 #messageTable{
+  font-size: small;
   color:antiquewhite;  
   position:relative;
   top: 8vh;
@@ -81,6 +109,10 @@ code {
   border-style: solid solid solid solid;
   width:50vw;
   border-collapse: collapse;
+}
+#commentForm{
+  background-color: rgb(59, 61, 68);
+  border-radius: 5px;
 }
 
 tr{
