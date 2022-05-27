@@ -45,6 +45,29 @@ code {
   border-radius: 5px;
 }
 
+#buttonLikes{
+  position: absolute;
+  left: 30%;
+  height: 3vh;
+  font-weight: bold;
+  background-color: rgb(180, 188, 214);
+  border: white 0.001em solid;
+  color: rgb(26, 23, 23);
+  border-radius: 5px;
+}
+
+#buttonTime{
+  position: absolute;
+  left: 65%;
+  height: 3vh;
+  font-weight: bold;
+  background-color: rgb(180, 188, 214);
+  border: white 0.001em solid;
+  color: rgb(26, 23, 23);
+  border-radius: 5px;
+}
+
+
 #messageTable{
   color:antiquewhite;  
   position:relative;

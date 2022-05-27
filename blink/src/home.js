@@ -110,7 +110,8 @@ function Home()
     class InputBox extends React.Component {
         state = {
           value:'',                           // value of current message in text box
-          textValue: []
+          textValue: [],
+          sortedByLikes: false, //by default sort by time (not by likes)
         };
       
         constructor(props) {
@@ -148,12 +149,33 @@ function Home()
           document.getElementById('tweetInput').value = '';   // sets the textbox to empty
           event.preventDefault();
         }
+        //change state based on sorting
+        sortByLikes()
+        {
+          this.setState({
+            sortedByLikes: true
+          })
+        }
+        sortByTime()
+        {
+          this.setState({
+            sortedByLikes: false
+          })
+        }
+
       
         render() { 
           //backEndConnect.delete('/messages/'); // deletes all messages
-          backEndConnect.get('/messages/').then(res => {
+          if (this.state.sortedByLikes == false) {
+            backEndConnect.get('/messages/').then(res => {
+            this.setState({ textValue: res.data.map(d => [d.userMessages, d.numberOfLikes, d.timeK, d.comments,d._id])})
+            })
+          }
+          else {
+            backEndConnect.get('/messages/sortedbylikes').then(res => {
             this.setState({ textValue: res.data.map(d => [d.userMessages, d.numberOfLikes, d.timeK, d.comments,d._id])})
           })
+          }
           return (
             <>
             <form onSubmit={this.handleSubmit} id="inputForm">
@@ -163,6 +185,10 @@ function Home()
               </label> 
               </form>
               <br></br>
+              <div>
+                <button id="buttonLikes" onClick={() => this.sortByLikes()}>Sort by likes</button>
+                <button id="buttonTime" onClick={() => this.sortByTime()}>Sort by time</button>
+              </div>
               <Table value={this.state.textValue}/>
             </>
           );

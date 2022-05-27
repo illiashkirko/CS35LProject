@@ -4,10 +4,21 @@ let Messages= require('../models/messages.model')   //connecting to messages mod
 
 //first route, get requests
 router.route('/').get((reg, res) => {
-    Messages.find()                             //method that gets all messages from the database
-    .then(messages => res.json(messages))       //returns all the messages in JSON format
-    .catch(err => res.status(400).json('Error: ' + err));
+    Messages.find().sort( { timeK: 1 }).exec(function(err, messages) { //method that gets all messages from the database
+        res.json(messages);                 //returns all the messages in JSON format
+       // res.status(400).json('Error: ' + err);
+    });                             
 });
+
+//returns all messages sorted by number of likes
+router.route('/sortedbylikes').get((req, res) => {
+    Messages.find().sort( { numberOfLikes: -1 } ).exec(function(err, messages) {
+        res.json(messages);
+        //res.status(400).json('Error: ' + err);
+    });    
+ });
+
+
 
 //post requests, adding data to database
     router.route('/add').post((req,res) => {
