@@ -26,13 +26,13 @@ code {
   color: white;
   background-color: rgb(47,49,55);
   /* border:white 0.1em solid; */
-  border:none;
+  border-radius: 15px;
   outline:none;
 }
 
 #tweetButton{
   width: 5vw;
-  height: 2vh;
+  height: 3vh;
   background-color: rgb(47,49,55);
   border: white 0.001em solid;
   color: white;
@@ -48,6 +48,7 @@ code {
 #buttonLikes{
   position: absolute;
   left: 30%;
+  top: 32%;
   height: 3vh;
   font-weight: bold;
   background-color: rgb(180, 188, 214);
@@ -59,6 +60,7 @@ code {
 #buttonTime{
   position: absolute;
   left: 65%;
+  top: 32%;
   height: 3vh;
   font-weight: bold;
   background-color: rgb(180, 188, 214);

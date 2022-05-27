@@ -112,21 +112,20 @@ function Home()
           value:'',                           // value of current message in text box
           textValue: [],
           sortedByLikes: false, //by default sort by time (not by likes)
+          search: '', // value to search
+          currSearching: true, // indicates that the user can input search queries, false - if user submitted a query
         };
       
         constructor(props) {
           super(props);
           this.handleChange = this.handleChange.bind(this); // handleChange handles when the textbox changes
           this.handleSubmit = this.handleSubmit.bind(this); // handles when you click the submit button 
+          this.handleSearchChange = this.handleSearchChange.bind(this); 
+          this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
         }
         
         handleChange(event) {    
-          this.setState(
-            {
-              value: event.target.value         // update current value
-            }
-          );
-      
+          this.setState({value: event.target.value});         // update current value
         }
       
         handleSubmit(event) {
@@ -142,11 +141,27 @@ function Home()
       
           this.setState(
             {
-              value: ''            // sets the textbox as empty
+              value: ''           // sets the textbox as empty
             }
           );
       
           document.getElementById('tweetInput').value = '';   // sets the textbox to empty
+          event.preventDefault();
+        }
+
+        handleSearchChange(event) {    
+          this.setState({
+            search: event.target.value,   // update current search value
+            currSearching: true // indicate that we started searching
+          });         
+        }
+      
+        handleSearchSubmit(event) {
+          this.setState({
+            currSearching: false // indicate that we stopped inputting searching
+          })
+      
+          document.getElementById('searchInput').value = '';   // sets the textbox to empty
           event.preventDefault();
         }
         //change state based on sorting
@@ -162,11 +177,14 @@ function Home()
             sortedByLikes: false
           })
         }
-
-      
-        render() { 
-          //backEndConnect.delete('/messages/'); // deletes all messages
-          if (this.state.sortedByLikes == false) {
+        updateMessages()
+        {
+          if (this.state.search != '' && this.state.currSearching == false) {
+            backEndConnect.get('/messages/search/'+this.state.search, this.state.search).then(res => {
+              this.setState({ textValue: res.data.map(d => [d.userMessages, d.numberOfLikes, d.timeK, d.comments,d._id])})
+              })
+          } 
+          else if (this.state.sortedByLikes == false) {
             backEndConnect.get('/messages/').then(res => {
             this.setState({ textValue: res.data.map(d => [d.userMessages, d.numberOfLikes, d.timeK, d.comments,d._id])})
             })
@@ -176,8 +194,21 @@ function Home()
             this.setState({ textValue: res.data.map(d => [d.userMessages, d.numberOfLikes, d.timeK, d.comments,d._id])})
           })
           }
+        }
+
+      
+        render() { 
+          //backEndConnect.delete('/messages/'); // deletes all messages
+          this.updateMessages();
           return (
             <>
+            <form onSubmit={this.handleSearchSubmit} id="inputForm">
+              <label>
+                <input id ="searchInput" placeholder="What do you want to look up?" type="text" value={this.state.search} 
+                      onChange={this.handleSearchChange} />
+                <input id="searchButton" type="submit" value="Search" />
+              </label> 
+              </form>
             <form onSubmit={this.handleSubmit} id="inputForm">
               <label>
                 <input id ="tweetInput" placeholder="What's on your mind?" type="text" value={this.state.value} onChange={this.handleChange} />

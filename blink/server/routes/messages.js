@@ -2,9 +2,9 @@ const router = require('express').Router();
 const { ObjectID } = require('bson');
 let Messages= require('../models/messages.model')   //connecting to messages model
 
-//first route, get requests
+//returns all messages sorted by time
 router.route('/').get((reg, res) => {
-    Messages.find().sort( { timeK: 1 }).exec(function(err, messages) { //method that gets all messages from the database
+    Messages.find().sort( { timeK: -1 }).exec(function(err, messages) { //method that gets all messages from the database sorted based on time
         res.json(messages);                 //returns all the messages in JSON format
        // res.status(400).json('Error: ' + err);
     });                             
@@ -17,7 +17,14 @@ router.route('/sortedbylikes').get((req, res) => {
         //res.status(400).json('Error: ' + err);
     });    
  });
-
+ //searches all messages by text
+ router.route('/search/:text').get((req, res) =>{
+    Messages.find({ userMessages: { $regex: '.*'+req.params.text+'.*' }})
+    .exec(function(err, messages) {
+      res.json(messages);
+      //res.status(400).json('Error: ' + err);
+    });    
+});
 
 
 //post requests, adding data to database
