@@ -1,4 +1,12 @@
 /* Bordered form */
+h2{
+  position:relative;
+  left:25vw;
+  height: 0.1vh;
+  color:aliceblue;
+  font-size: 3vmin;
+}
+
 .loginform {
     border: 1px solid #a5a5a5;
     position: relative;

@@ -45,10 +45,11 @@ function Login() {
 
   return (   
   <>
+  <h2>Login to your Blink account</h2>
   <form class="loginform" onSubmit = {handleSubmit(onSubmit)}>
     <div class="logincontainer">
       <label for="uname" class="logintext"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname"{...register("UserName")}></input>
+      <input type="text" placeholder="Create Username" name="uname"{...register("UserName")}></input>
   
       <label for="psw" class="logintext"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw"{...register("Password")}></input>
