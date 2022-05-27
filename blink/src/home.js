@@ -8,20 +8,33 @@ import axios from 'axios'
 function Home() 
 {
     const backEndConnect= axios.create({
-        baseURL : 'http://localhost:228'
+        baseURL : 'http://localhost:5035'
       }) 
       const root = ReactDOM.createRoot(document.getElementById('root'));
 
-    function handleClick(event) {
-        const message = { 
-          _id: event[3],
-          userMessages : event[0],
-          numberOfLikes : event[1] + 1,
-          timeK: event[2],
-        }
-        backEndConnect.post('/messages/update/'+event[3], message);
+    //increments like count or stores new comment
+    function storeLikeOrComment(oldMessageData,comment=null) {
+      var likeCount = oldMessageData[1];
+      var commentList = oldMessageData[3];
+      if(comment)
+      {
+        commentList.push(comment);
       }
-
+      else
+      {
+        likeCount++;
+      }
+      //creating new message
+      const message = { 
+        userMessages: oldMessageData[0],
+        numberOfLikes: likeCount,
+        timeK: oldMessageData[2],
+        comments: commentList,
+        _id: oldMessageData[4]
+      }
+        backEndConnect.post('/messages/update/'+oldMessageData[4], message);
+    }
+      //table of comments (each message has one) 
       class CommentTable extends React.Component {
         state = {
           value:'',                           // value of current message in text box
@@ -29,7 +42,6 @@ function Home()
 
         constructor(props) {
           super(props);
-      
           this.handleChange = this.handleChange.bind(this);
           this.handleSubmit = this.handleSubmit.bind(this);
         }
@@ -39,40 +51,32 @@ function Home()
         }
       
         handleSubmit(event) {
-          console.log(this);
-          // Find a <table> element with id="myTable":
-          var table = this.refs.myTable;
-
-          // Create an empty <tr> element and add it to the 1st position of the table:
-          var row = table.insertRow(1);
-
-          // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-          var cell1 = row.insertCell(0);
-
-          // Add some text to the new cells:
-          cell1.innerHTML = this.state.value;
-
-          console.log(this.state.value);
-          this.state.value = "";
+          storeLikeOrComment(this.props.messageData,this.state.value);  //send new comment to DB
+          this.state.value = "";                                      //clear value in text box
           event.preventDefault();
         }
       
         render() {
           return (
-            <>
             <table ref="myTable">
               <tbody>
-              <tr>
-                <td onSubmit={this.handleSubmit}>
-                  <form onSubmit={this.handleSubmit}>
-                  <input type="text" value={this.state.value} onChange={this.handleChange}/>
-                  </form>
-                </td>
-              </tr>
+                <tr>
+                  <td onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit}>
+                      <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                    </form>
+                  </td>
+                </tr>
+              {this.props.messageData[3].map(comments =>
+                <tr>
+                  <td>
+                    {comments}
+                  </td>
+                </tr>
+              )}
               </tbody>
             </table>
-            </>
-          );
+          )              
         }
       }
       
@@ -83,10 +87,10 @@ function Home()
             <tbody>
                 {value.map(value =>(
                     
-                    <><tr key={value[3]}>
+                    <><tr key={value[4]}>
                     <td>{value[0]}</td>
                     <td id="votingData">
-                      <button id="like-button" type="button" onClick={() => handleClick(value)}> <img id="like-icon" alt="like button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Facebook_Like_button.svg/1024px-Facebook_Like_button.svg.png" width="20em" /></button>
+                      <button id="like-button" type="button" onClick={() => storeLikeOrComment(value)}> <img id="like-icon" alt="like button" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Facebook_Like_button.svg/1024px-Facebook_Like_button.svg.png" width="20em" /></button>
                     </td>
                     <td>
                       {value[1]}
@@ -94,12 +98,10 @@ function Home()
                   </tr>
                   {/* this row contains the table of comments */}
                   <tr key="commentsRow">
-                      <td> <CommentTable /></td>
+                      <td> <CommentTable messageData={value} /></td>
                     </tr></>
                 ))}
-                
                 </tbody>
-      
         </table>
         </>
         )
@@ -132,6 +134,7 @@ function Home()
             userMessages : this.state.value,
             numberOfLikes : 0,
             timeK: Date.now(),
+            comments : []
           }
           backEndConnect.post('/messages/add', message).
           then(res => console.log(res.data));
@@ -149,7 +152,7 @@ function Home()
         render() { 
           //backEndConnect.delete('/messages/'); // deletes all messages
           backEndConnect.get('/messages/').then(res => {
-            this.setState({ textValue: res.data.map(d => [d.userMessages, d.numberOfLikes, d.timeK, d._id])})
+            this.setState({ textValue: res.data.map(d => [d.userMessages, d.numberOfLikes, d.timeK, d.comments,d._id])})
           })
           return (
             <>
@@ -161,12 +164,10 @@ function Home()
               </form>
               <br></br>
               <Table value={this.state.textValue}/>
-      
             </>
           );
         }
       }
-      
       
       root.render(<InputBox />);
 }

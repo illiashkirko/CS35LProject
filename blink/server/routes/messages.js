@@ -10,17 +10,19 @@ router.route('/').get((reg, res) => {
 });
 
 //post requests, adding data to database
-router.route('/add').post((req,res) => {
+    router.route('/add').post((req,res) => {
     //extracting data from request
     const userMessages = req.body.userMessages;
     const numberOfLikes = req.body.numberOfLikes;
     const timeK = req.body.timeK;
+    const comments = req.body.comments; 
 
     //creating new message based on data
     const newMessage = new Messages({
         userMessages,
         numberOfLikes,
-        timeK
+        timeK,
+        comments
     });
 
     //saving message on db
@@ -54,6 +56,7 @@ router.route('/update/:id').post((req, res)=> {
             message.userMessages = req.body.userMessages;
             message.numberOfLikes = req.body.numberOfLikes;
             message.timeK = req.body.timeK;
+            message.comments = req.body.comments;
             message.save()
                 .then(() => res.json('Message updated!'))
                 .catch(err => res.status(400).json('Error: ' + err));
