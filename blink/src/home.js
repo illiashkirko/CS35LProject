@@ -259,12 +259,10 @@ function Home() {
             </label>
           </form>
           <div>
-            <button id="buttonLikes" onClick={() => this.sortByLikes()}>
-              Sort by likes
-            </button>
-            <button id="buttonTime" onClick={() => this.sortByTime()}>
-              Sort by time
-            </button>
+            <input id="buttonLikes" type="submit" value="Sort by likes"onClick={() => this.sortByLikes()}>
+            </input>
+            <input id="buttonTime" type="submit" value="Sort by time" onClick={() => this.sortByTime()}>
+            </input>
           </div>
           <Table value={this.state.textValue} />
         </>
