@@ -140,6 +140,11 @@ code {
 #commentForm{
   background-color: rgb(59, 61, 68);
   border-radius: 5px;
+  width: 20vw;
+  height:5vw;
+  color: white;
+  outline:none;
+  font-size:1.6vh;
 }
 
 tr{
@@ -165,4 +170,17 @@ tr{
 #votingData{
   text-align: right;
   margin: none;
+}
+
+#link{
+  text-decoration: none;
+  position:relative;
+  left: 85vw;
+  color:rgb(223, 25, 25);
+}
+#link:hover{
+  color:rgb(132, 19, 19);
+}
+#link:active{
+  color:rgb(21, 86, 252);
 }

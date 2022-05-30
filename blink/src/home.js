@@ -5,16 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
 
+
 function Home() {
   const backEndConnect = axios.create({
     baseURL: "http://localhost:5035",
   });
+  
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
   //increments like count or stores new comment
   function storeLikeOrComment(oldMessageData, comment = null) {
-    var likeCount = oldMessageData[1];
-    var commentList = oldMessageData[3];
+    var likeCount = oldMessageData.numberOfLikes;
+    var commentList = oldMessageData.comments;
     if (comment) {
       commentList.push(comment);
     } else {
@@ -22,13 +24,17 @@ function Home() {
     }
     //creating new message
     const message = {
-      userMessages: oldMessageData[0],
+      user: oldMessageData.user,
+      userMessages: oldMessageData.userMessages,
       numberOfLikes: likeCount,
-      timeK: oldMessageData[2],
+      timeK: oldMessageData.timeK,
       comments: commentList,
-      _id: oldMessageData[4],
+      _id: oldMessageData._id,
     };
-    backEndConnect.post("/messages/update/" + oldMessageData[4], message);
+    backEndConnect.post("/messages/update/" + oldMessageData._id, message);
+  }
+  function goToProfile(userName) {
+    window.location.href = '/profile/'+userName;
   }
   //table of comments (each message has one)
   class CommentTable extends React.Component {
@@ -67,7 +73,7 @@ function Home() {
                 </form>
               </td>
             </tr>
-            {this.props.messageData[3].map((comments) => (
+            {this.props.messageData.comments.map((comments) => (
               <tr>
                 <td>{comments}</td>
               </tr>
@@ -77,7 +83,7 @@ function Home() {
       );
     }
   }
-
+  
   const Table = ({ value }) => {
     return (
       <>
@@ -85,8 +91,9 @@ function Home() {
           <tbody>
             {value.map((value) => (
               <>
-                <tr key={value[4]}>
-                  <td>{value[0]}</td>
+                <tr key={value._id}>
+                  <td><p onClick={() => goToProfile(value.user)}>@{value.user}</p></td>
+                  <td>{value.userMessages}</td>
                   <td id="votingData">
                     <button
                       id="like-button"
@@ -102,7 +109,7 @@ function Home() {
                       />
                     </button>
                   </td>
-                  <td>{value[1]}</td>
+                  <td>{value.numberOfLikes}</td>
                 </tr>
                 {/* this row contains the table of comments */}
                 <tr key="commentsRow">
@@ -143,6 +150,7 @@ function Home() {
     handleSubmit(event) {
       //backend
       const message = {
+        user: sessionStorage.getItem("current_user"),
         userMessages: this.state.value,
         numberOfLikes: 0,
         timeK: Date.now(),
@@ -183,6 +191,7 @@ function Home() {
       });
     }
     sortByTime() {
+      console.log("timesort");
       this.setState({
         sortedByLikes: false,
       });
@@ -193,37 +202,19 @@ function Home() {
           .get("/messages/search/" + this.state.search, this.state.search)
           .then((res) => {
             this.setState({
-              textValue: res.data.map((d) => [
-                d.userMessages,
-                d.numberOfLikes,
-                d.timeK,
-                d.comments,
-                d._id,
-              ]),
+              textValue: res.data.slice(),
             });
           });
       } else if (this.state.sortedByLikes == false) {
         backEndConnect.get("/messages/").then((res) => {
           this.setState({
-            textValue: res.data.map((d) => [
-              d.userMessages,
-              d.numberOfLikes,
-              d.timeK,
-              d.comments,
-              d._id,
-            ]),
+            textValue: res.data.slice()
           });
         });
       } else {
         backEndConnect.get("/messages/sortedbylikes").then((res) => {
           this.setState({
-            textValue: res.data.map((d) => [
-              d.userMessages,
-              d.numberOfLikes,
-              d.timeK,
-              d.comments,
-              d._id,
-            ]),
+            textValue: res.data.slice(), 
           });
         });
       }
@@ -234,6 +225,7 @@ function Home() {
       this.updateMessages();
       return (
         <>
+        <div>
           <form onSubmit={this.handleSearchSubmit} id="inputForm">
             <label>
               <input
@@ -246,6 +238,8 @@ function Home() {
               <input id="searchButton" type="submit" value="Search" />
             </label>
           </form>
+          <a id="link" href='/login'><u>LOG OUT</u></a>
+        </div>
           <form onSubmit={this.handleSubmit} id="inputForm">
             <label>
               <input
@@ -258,6 +252,7 @@ function Home() {
               <input id="tweetButton" type="submit" value="Post" />
             </label>
           </form>
+          
           <div>
             <input id="buttonLikes" type="submit" value="Sort by likes"onClick={() => this.sortByLikes()}>
             </input>

@@ -85,14 +85,14 @@ h2{
 .logintext{
     color:azure;
   }
-#link{
+#linksignup{
     text-decoration: none;
-    color:rgb(163, 163, 163);
+    color:rgb(100, 191, 44);
 }
-#link:hover{
+#linksignup:hover{
     color:rgb(127, 214, 255);
 }
-#link:active{
+#linksignup:active{
     color:rgb(21, 86, 252);
 }
 .loginneedacc{

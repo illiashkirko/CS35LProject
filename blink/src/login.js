@@ -23,13 +23,14 @@ function Login() {
   })
 
   const onSubmit = (d) => {
-    console.log(users);
-    console.log(password);
+    //console.log(users);
+    //console.log(password);
     let found=false;
-  for(let i=0; i< users.length; i=i+1){
+  for(let i = 0; i < users.length; i = i + 1){
     if(users[i] === d.UserName){
       if(password[i] === d.Password){
         alert("Succesful");
+        sessionStorage.setItem("current_user", d.UserName);
         found=true;
         window.location.href='/';
         break;
@@ -49,7 +50,7 @@ function Login() {
   <form class="loginform" onSubmit = {handleSubmit(onSubmit)}>
     <div class="logincontainer">
       <label for="uname" class="logintext"><b>Username</b></label>
-      <input type="text" placeholder="Create Username" name="uname"{...register("UserName")}></input>
+      <input type="text" placeholder="Enter Username" name="uname"{...register("UserName")}></input>
   
       <label for="psw" class="logintext"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw"{...register("Password")}></input>
@@ -61,8 +62,8 @@ function Login() {
     <div class="logincontainer logincontainer2">
       <button type="button" class="logincancelbtn loginbutton">Cancel</button>
       <ul class="psw">
-        <li class="loginli"><i><b>Need an account? </b></i><a id="link" href=''><u>SIGN UP</u></a></li>
-        <li class="loginli"><a id="link" href="./">Forgot password?</a></li>
+        <li class="loginli"><i><b>Need an account? </b></i><a id="linksignup" href='/signup'><u>SIGN UP</u></a></li>
+        <li class="loginli"><a id="linksignup" href="./">Forgot password?</a></li>
       </ul>
     </div>
   </form>

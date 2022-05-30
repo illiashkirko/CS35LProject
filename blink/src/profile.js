@@ -1,7 +1,13 @@
 import React from "react";
 import './profile.css'
+import axios from "axios";
 
-function Profile() {
+function Profile(userName) {
+
+  const backEndConnect = axios.create({
+    baseURL: "http://localhost:5035",
+  });
+
 
   let currentUsername = "currentu"
   let username = "username";
