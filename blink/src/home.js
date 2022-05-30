@@ -1,16 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./home.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
-import Profile from "./profile.js"
 
 function Home() {
   const backEndConnect = axios.create({
     baseURL: "http://localhost:5035",
   });
-  
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
   //increments like count or stores new comment
@@ -38,8 +34,7 @@ function Home() {
     backEndConnect.get("/users/" + userName, userName)
     .then((res) => {
       sessionStorage.setItem("viewing_user", res.data[0].userName); //stores userinformation in global scope before going to their page
-      sessionStorage.setItem("follower_count", res.data[0].followers);
-      sessionStorage.setItem("following_count", res.data[0].following);
+      sessionStorage.setItem("viewing_user_id", res.data[0]._id);
       window.location.href = '/profile/'+userName;
     });
     
@@ -62,7 +57,9 @@ function Home() {
 
     handleSubmit(event) {
       storeLikeOrComment(this.props.messageData, this.state.value); //send new comment to DB
-      this.state.value = ""; //clear value in text box
+      this.setState({
+        value: "",
+      }); //clear value in text box
       event.preventDefault();
     }
 
@@ -205,7 +202,7 @@ function Home() {
       });
     }
     updateMessages() {
-      if (this.state.search != "" && this.state.currSearching == false) {
+      if (this.state.search !== "" && this.state.currSearching === false) {
         backEndConnect
           .get("/messages/search/" + this.state.search, this.state.search)
           .then((res) => {
@@ -213,7 +210,7 @@ function Home() {
               textValue: res.data.slice(), //instead of having an array with ambigous indecies, let's have a copy of the resulting dictionary
             });
           });
-      } else if (this.state.sortedByLikes == false) {
+      } else if (this.state.sortedByLikes === false) {
         backEndConnect.get("/messages/").then((res) => {
           this.setState({
             textValue: res.data.slice()
@@ -233,6 +230,7 @@ function Home() {
       this.updateMessages();
       return (
         <>
+        <dib> <h1>Hello {sessionStorage.getItem("current_user")}</h1></dib>
         <div>
           <form onSubmit={this.handleSearchSubmit} id="inputForm">
             <label>
@@ -246,7 +244,10 @@ function Home() {
               <input id="searchButton" type="submit" value="Search" />
             </label>
           </form>
-          <a id="link" href='/login'><u>LOG OUT</u></a> 
+          <a id="link" href='/login'><u>LOG IN</u></a> 
+          <div> <a id="link" href='/signup'><u>SIGN UP</u></a> </div>
+          <div> <a id="link" href='/login' onClick={()=> {sessionStorage.removeItem("current_user");
+                                                          sessionStorage.removeItem("current_user_id");}}><u>LOG OUT</u></a> </div>
         </div>
           <form onSubmit={this.handleSubmit} id="inputForm">
             <label>

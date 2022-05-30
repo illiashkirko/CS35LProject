@@ -1,6 +1,5 @@
 import React from "react";
 import './signup.css'
-import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios'
 
@@ -44,7 +43,7 @@ function Signup(){
             <button type="submit" class="logintext loginbutton">Sign Up</button>
           </div>
           <div class="logincontainer logincontainer2">
-            <button type="button" class="logincancelbtn loginbutton">Cancel</button>
+            <button type="button" class="logincancelbtn loginbutton" onClick={() => {window.location.href='/';}}>Cancel</button>
             <ul class="psw">
               <li class="loginli"><i><b>Have an account? </b></i><a id="linksignup" href='/login'><u>LOG IN</u></a></li>
             </ul>

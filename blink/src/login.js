@@ -15,10 +15,10 @@ function Login() {
   let password=[];
 
   backEndConnect.get('/users/').then(res => {
-    { users = res.data.map( d => d.userName );}
+     users = res.data.map( d => d.userName );
   });
   backEndConnect.get('/users/').then(res => {
-    { password = res.data.map( d => d.password );}
+     password = res.data.map( d => d.password );
   })
 
   const onSubmit = (d) => {
@@ -30,6 +30,11 @@ function Login() {
         if(password[i] === d.Password){
           alert("Succesful");
           sessionStorage.setItem("current_user", d.UserName); //store current logged in user
+          backEndConnect.get("/users/" + d.UserName, d.UserName)
+          .then((res) => {
+            sessionStorage.setItem("current_user_id", res.data[0]._id);
+            console.log(res.data[0]._id)
+          });
           found = true;
           window.location.href = '/'; //go to mainpage
           break;
@@ -38,7 +43,7 @@ function Login() {
    
   }
   if(found===false) {
-    alert("Wrong Password!");
+    alert("Wrong password or username!");
   }
 
 };
@@ -59,7 +64,7 @@ function Login() {
       </label>
     </div>
     <div class="logincontainer logincontainer2">
-      <button type="button" class="logincancelbtn loginbutton">Cancel</button>
+      <button type="button" class="logincancelbtn loginbutton" onClick={() => {window.location.href='/';}}>Cancel</button>
       <ul class="psw">
         <li class="loginli"><i><b>Need an account? </b></i><a id="linksignup" href='/signup'><u>SIGN UP</u></a></li>
         <li class="loginli"><a id="linksignup" href="./">Forgot password?</a></li>
