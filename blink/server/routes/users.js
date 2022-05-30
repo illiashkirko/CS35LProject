@@ -30,19 +30,21 @@ router.route('/add').post((req,res) => {
     .then(()=> res.json('User added'))
     .catch(err=> res.status(400).json('Error' + err));
 });
-
-router.route('/:id').get((req, res) =>{
-    Users.findById(req.params.id)
-    .then(users => res.json(users))
+//look up a user by its username - returns an array!
+router.route('/:userName').get((req, res) =>{
+    Users.find({ userName: req.params.userName })
+    .then(user => res.json(user))
     .catch(err=> res.status(400).json('Error' + err));
 })
+//delete a user
 router.route('/:id').delete((req,res)=> {
     Users.findByIdAndDelete(req.params.id)
     .then(()=> res.json('Users Deleted'))
     .catch(err=> res.status(400).json('Error' + err));
 });
 
-//delete all messages
+
+//delete all users
 router.route('/').delete((req,res)=> {
     Users.deleteMany()
     .then(()=> res.json('All Users Deleted'))

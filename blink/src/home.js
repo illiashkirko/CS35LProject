@@ -4,7 +4,7 @@ import "./home.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
-
+import Profile from "./profile.js"
 
 function Home() {
   const backEndConnect = axios.create({
@@ -33,8 +33,16 @@ function Home() {
     };
     backEndConnect.post("/messages/update/" + oldMessageData._id, message);
   }
+  //changing to profile page
   function goToProfile(userName) {
-    window.location.href = '/profile/'+userName;
+    backEndConnect.get("/users/" + userName, userName)
+    .then((res) => {
+      sessionStorage.setItem("viewing_user", res.data[0].userName); //stores userinformation in global scope before going to their page
+      sessionStorage.setItem("follower_count", res.data[0].followers);
+      sessionStorage.setItem("following_count", res.data[0].following);
+      window.location.href = '/profile/'+userName;
+    });
+    
   }
   //table of comments (each message has one)
   class CommentTable extends React.Component {
@@ -202,7 +210,7 @@ function Home() {
           .get("/messages/search/" + this.state.search, this.state.search)
           .then((res) => {
             this.setState({
-              textValue: res.data.slice(),
+              textValue: res.data.slice(), //instead of having an array with ambigous indecies, let's have a copy of the resulting dictionary
             });
           });
       } else if (this.state.sortedByLikes == false) {
@@ -238,7 +246,7 @@ function Home() {
               <input id="searchButton" type="submit" value="Search" />
             </label>
           </form>
-          <a id="link" href='/login'><u>LOG OUT</u></a>
+          <a id="link" href='/login'><u>LOG OUT</u></a> 
         </div>
           <form onSubmit={this.handleSubmit} id="inputForm">
             <label>

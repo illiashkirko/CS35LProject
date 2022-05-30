@@ -1,6 +1,5 @@
 import React from "react";
 import './login.css'
-import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios'
 
@@ -26,20 +25,20 @@ function Login() {
     //console.log(users);
     //console.log(password);
     let found=false;
-  for(let i = 0; i < users.length; i = i + 1){
-    if(users[i] === d.UserName){
-      if(password[i] === d.Password){
-        alert("Succesful");
-        sessionStorage.setItem("current_user", d.UserName);
-        found=true;
-        window.location.href='/';
-        break;
+    for(let i = 0; i < users.length; i = i + 1){
+      if(users[i] === d.UserName){
+        if(password[i] === d.Password){
+          alert("Succesful");
+          sessionStorage.setItem("current_user", d.UserName); //store current logged in user
+          found = true;
+          window.location.href = '/'; //go to mainpage
+          break;
+        }
       }
-    }
    
   }
-  if(found===false){
-  alert("Wrong Password!");
+  if(found===false) {
+    alert("Wrong Password!");
   }
 
 };

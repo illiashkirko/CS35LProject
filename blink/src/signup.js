@@ -11,17 +11,8 @@ function Signup(){
 
   const {register, handleSubmit} = useForm();
 
-  let users=[];
-  let password=[];
-
-  backEndConnect.get('/users/').then(res => {
-    { users = res.data.map( d => d.userName );}
-  });
-  backEndConnect.get('/users/').then(res => {
-    { password = res.data.map( d => d.password );}
-  })
-
   const onSubmit = (d) => {
+    //create new user
     const user = {
       userName: d.UserName,
       followers: 0,
@@ -29,9 +20,11 @@ function Signup(){
       password: d.Password,
     };
     console.log(user.userName)
+    //add user to the database
     backEndConnect
       .post("/users/add", user)
       .then((res) => console.log(res.data));
+    //go to login page
     window.location.href="/login";
   };
     return (   
