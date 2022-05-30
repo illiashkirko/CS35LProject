@@ -30,6 +30,7 @@ router.route('/sortedbylikes').get((req, res) => {
 //post requests, adding data to database
     router.route('/add').post((req,res) => {
     //extracting data from request
+    const user = req.body.user;
     const userMessages = req.body.userMessages;
     const numberOfLikes = req.body.numberOfLikes;
     const timeK = req.body.timeK;
@@ -37,6 +38,7 @@ router.route('/sortedbylikes').get((req, res) => {
 
     //creating new message based on data
     const newMessage = new Messages({
+        user,
         userMessages,
         numberOfLikes,
         timeK,
@@ -71,6 +73,7 @@ router.route('/').delete((req,res)=> {
 router.route('/update/:id').post((req, res)=> {
     Messages.findById(req.params.id)
         .then(message => {
+            message.user = req.body.user;
             message.userMessages = req.body.userMessages;
             message.numberOfLikes = req.body.numberOfLikes;
             message.timeK = req.body.timeK;

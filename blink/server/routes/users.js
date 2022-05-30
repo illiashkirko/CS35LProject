@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const { ObjectID } = require('bson');
-let Users= require('../models/users.model')   //connecting to messages model
+let Users= require('../models/users.model')   //connecting to users model
 
 //first route, get requests
 router.route('/').get((reg, res) => {
-    Users.find()                             //method that gets all messages from the database
-    .then(users => res.json(users))       //returns all the messages in JSON format
+    Users.find()                             //method that gets all users from the database
+    .then(users => res.json(users))       //returns all the users in JSON format
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -17,8 +17,7 @@ router.route('/add').post((req,res) => {
     const following = req.body.following;
     const password = req.body.password;
 
-
-    //creating new message based on data
+    //creating new user based on data
     const newUsers = new Users({
         userName,
         followers,
@@ -28,7 +27,7 @@ router.route('/add').post((req,res) => {
 
     //saving message on db
     newUsers.save()
-    .then(()=> res.json('Message submitted'))
+    .then(()=> res.json('User added'))
     .catch(err=> res.status(400).json('Error' + err));
 });
 
@@ -46,7 +45,7 @@ router.route('/:id').delete((req,res)=> {
 //delete all messages
 router.route('/').delete((req,res)=> {
     Users.deleteMany()
-    .then(()=> res.json('All Messages Deleted'))
+    .then(()=> res.json('All Users Deleted'))
     .catch(err=> res.status(400).json('Error' + err));
 });
 
@@ -61,7 +60,7 @@ router.route('/update/:id').post((req, res)=> {
             users.password = req.body.password;
 
             users.save()
-                .then(() => res.json('Message updated!'))
+                .then(() => res.json('User updated!'))
                 .catch(err => res.status(400).json('Error: ' + err));
     })
 })
