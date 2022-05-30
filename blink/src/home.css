@@ -184,3 +184,12 @@ tr{
 #link:active{
   color:rgb(21, 86, 252);
 }
+
+#username{
+  cursor: pointer;
+  color: aqua;
+}
+
+#username:hover {
+  color: orange;
+}

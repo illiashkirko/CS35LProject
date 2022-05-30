@@ -5,7 +5,7 @@ import axios from "axios";
 
 function Home() {
   const backEndConnect = axios.create({
-    baseURL: "http://localhost:5035",
+    baseURL: "http://localhost:5045",
   });
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -97,7 +97,7 @@ function Home() {
             {value.map((value) => (
               <>
                 <tr key={value._id}>
-                  <td><p onClick={() => goToProfile(value.user)}>@{value.user}</p></td>
+                  <td id="username"><u><p onClick={() => goToProfile(value.user)}>@{value.user}</p></u></td>
                   <td>{value.userMessages}</td>
                   <td id="votingData">
                     <button
