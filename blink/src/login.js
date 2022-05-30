@@ -11,41 +11,21 @@ function Login() {
 
   const {register, handleSubmit} = useForm();
 
-  let users=[];
-  let password=[];
-
-  backEndConnect.get('/users/').then(res => {
-     users = res.data.map( d => d.userName );
-  });
-  backEndConnect.get('/users/').then(res => {
-     password = res.data.map( d => d.password );
-  })
-
   const onSubmit = (d) => {
-    //console.log(users);
-    //console.log(password);
-    let found=false;
-    for(let i = 0; i < users.length; i = i + 1){
-      if(users[i] === d.UserName){
-        if(password[i] === d.Password){
-          alert("Succesful");
-          sessionStorage.setItem("current_user", d.UserName); //store current logged in user
-          backEndConnect.get("/users/" + d.UserName, d.UserName)
-          .then((res) => {
-            sessionStorage.setItem("current_user_id", res.data[0]._id);
-            console.log(res.data[0]._id)
-          });
-          found = true;
-          window.location.href = '/'; //go to mainpage
-          break;
-        }
-      }
-   
-  }
-  if(found===false) {
-    alert("Wrong password or username!");
-  }
 
+    backEndConnect.get("/users/" + d.UserName, d.UserName)
+    .then((res) => {
+      if (res.data.length == 0) {
+        alert("Username is not registered!");
+      } else if (res.data[0].password == d.Password) {
+          sessionStorage.setItem("current_user_id", res.data[0]._id);
+          alert("Succesful");
+          window.location.href = '/'; //go to mainpage
+      }
+      else {
+        alert("Wrong password!");
+      }
+    });
 };
 
   return (   

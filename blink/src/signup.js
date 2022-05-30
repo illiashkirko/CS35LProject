@@ -18,13 +18,21 @@ function Signup(){
       following: 0,
       password: d.Password,
     };
-    console.log(user.userName)
-    //add user to the database
-    backEndConnect
-      .post("/users/add", user)
-      .then((res) => console.log(res.data));
-    //go to login page
-    window.location.href="/login";
+    backEndConnect.get("/users/" + d.UserName, d.UserName)
+    .then((res) => {
+      if (res.data.length > 0) {
+        alert("Username is already registered!");
+      } else {
+        //add user to the database
+        backEndConnect
+        .post("/users/add", user)
+        .then((res) => console.log(res.data));
+        alert("Success!");
+        //go to login page
+        window.location.href="/login";
+      }
+    });
+    
   };
     return (   
         <>
