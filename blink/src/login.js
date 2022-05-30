@@ -19,6 +19,7 @@ function Login() {
         alert("Username is not registered!");
       } else if (res.data[0].password == d.Password) {
           sessionStorage.setItem("current_user_id", res.data[0]._id);
+          sessionStorage.setItem("current_user", d.UserName);
           alert("Succesful");
           window.location.href = '/'; //go to mainpage
       }
