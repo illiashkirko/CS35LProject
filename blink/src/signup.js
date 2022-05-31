@@ -6,7 +6,7 @@ import myRoute from "./global_variables";
 
 function Signup(){
   const backEndConnect= axios.create({
-    baseURL : 'http://localhost:'+myRoute
+    baseURL : 'http://localhost:5050'
   }) 
 
   const {register, handleSubmit} = useForm();
@@ -32,7 +32,7 @@ function Signup(){
         .then((res) => console.log(res.data));
         alert("Success!");
         //go to login page
-        window.location.href="/login";
+        window.location.href="/";
       }
     });
     
@@ -54,9 +54,9 @@ function Signup(){
             <button type="submit" class="logintext loginbutton">Sign Up</button>
           </div>
           <div class="logincontainer logincontainer2">
-            <button type="button" class="logincancelbtn loginbutton" onClick={() => {window.location.href='/';}}>Cancel</button>
+            <button type="button" class="logincancelbtn loginbutton" onClick={() => {window.location.href='/home';}}>Cancel</button>
             <ul class="psw">
-              <li class="loginli"><i><b>Have an account? </b></i><a id="linksignup" href='/login'><u>LOG IN</u></a></li>
+              <li class="loginli"><i><b>Have an account? </b></i><a id="linksignup" href='/'><u>LOG IN</u></a></li>
             </ul>
           </div>
         </form>

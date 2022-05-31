@@ -8,7 +8,7 @@ import myRoute from "./global_variables";
 
 function Profile() {
   const backEndConnect = axios.create({
-    baseURL: "http://localhost:"+myRoute,
+    baseURL: "http://localhost:5050",
   });
   const root = ReactDOM.createRoot(document.getElementById("root"));
 

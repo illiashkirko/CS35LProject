@@ -6,7 +6,7 @@ import myRoute from "./global_variables";
 
 function Home() {
   const backEndConnect = axios.create({
-    baseURL: "http://localhost:"+myRoute,
+    baseURL: "http://localhost:5050",
   });
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -259,9 +259,9 @@ function Home() {
               <input id="searchButton" type="submit" value="Search" />
             </label>
           </form>
-          <a id="link" href='/login'><u>LOG IN</u></a> 
+          <a id="link" href='/'><u>LOG IN</u></a> 
           <div> <a id="link" href='/signup'><u>SIGN UP</u></a> </div>
-          <div> <a id="link" href='/login' onClick={()=> {sessionStorage.removeItem("current_user");
+          <div> <a id="link" href='/' onClick={()=> {sessionStorage.removeItem("current_user");
                                                           sessionStorage.removeItem("current_user_id");}}><u>LOG OUT</u></a> </div>
         </div>
           <form onSubmit={this.handleSubmit} id="inputForm">
