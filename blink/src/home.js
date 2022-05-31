@@ -100,15 +100,15 @@ function Home() {
             {value.map((value) => (
               <>
                 <tr key={value._id}>
-                  <td id="username"><u><b><p onClick={() => goToProfile(value.user)}>@{value.user}</p></b></u></td></tr>
+                  <td id="username"><b><p onClick={() => goToProfile(value.user)}>@{value.user}</p></b></td></tr>
                 <tr id="tweetrow"><td>{value.userMessages}</td>
-                  <td>
+                  <td id="commentbutton">
                     <button id="like-button"
                     type="button"
                     onClick={() => makecommentbox()}>
                     <img id="comment-icon"
                     alt="comment button"
-                    src=" https://cdn-icons-png.flaticon.com/512/25/25663.png"
+                    src="commenticon.png"
                     width="20em"
                     ></img>
                     </button>
