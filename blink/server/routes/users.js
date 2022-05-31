@@ -39,7 +39,6 @@ router.route('/:userName').get((req, res) =>{
 })
 //look up a user by its id
 router.route('/id/:id').get((req, res) =>{
-    //console.log(req.params.id);
     Users.findById(req.params.id)
     .then(user => res.json(user))
     .catch(err=> res.status(400).json('Error' + err));
