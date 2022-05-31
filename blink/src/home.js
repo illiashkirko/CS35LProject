@@ -2,10 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./home.css";
 import axios from "axios";
+import myRoute from "./global_variables";
 
 function Home() {
   const backEndConnect = axios.create({
-    baseURL: "http://localhost:5045",
+    baseURL: "http://localhost:"+myRoute,
   });
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
