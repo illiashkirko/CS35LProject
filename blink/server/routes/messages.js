@@ -44,6 +44,7 @@ router.route('/search/username/:user').get((req, res) =>{
     const numberOfLikes = req.body.numberOfLikes;
     const timeK = req.body.timeK;
     const comments = req.body.comments; 
+    const likeppl = req.body.likeppl;
 
     //creating new message based on data
     const newMessage = new Messages({
@@ -51,7 +52,8 @@ router.route('/search/username/:user').get((req, res) =>{
         userMessages,
         numberOfLikes,
         timeK,
-        comments
+        comments,
+        likeppl,
     });
 
     //saving message on db
@@ -87,6 +89,7 @@ router.route('/update/:id').post((req, res)=> {
             message.numberOfLikes = req.body.numberOfLikes;
             message.timeK = req.body.timeK;
             message.comments = req.body.comments;
+            message.likeppl = req.body.likeppl;
             message.save()
                 .then(() => res.json('Message updated!'))
                 .catch(err => res.status(400).json('Error: ' + err));
