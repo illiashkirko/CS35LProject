@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./home.css";
 import axios from "axios";
-import myRoute from "./global_variables";
 import $ from 'jquery';
 
 function Home() {
@@ -258,7 +257,7 @@ function Home() {
           <button class="dropbtn"><p id = "intro">{sessionStorage.getItem("current_user")}</p><img id="pfp" src="pfpwhite.png" alt="pfp"></img></button>
           <div class="dropdown-content">
             <a onClick={() => goToProfile(sessionStorage.getItem("current_user"))}>My Profile</a>
-            <a href='/login' onClick={()=> {sessionStorage.removeItem("current_user"); 
+            <a href='/' onClick={()=> {sessionStorage.removeItem("current_user"); 
             sessionStorage.removeItem("current_user_id");}}>LOG OUT</a>
           </div>
         </div>
