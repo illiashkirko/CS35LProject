@@ -19,10 +19,17 @@ function Profile() {
   function storeLikeOrComment(oldMessageData, comment = null) {
     var likeCount = oldMessageData.numberOfLikes;
     var commentList = oldMessageData.comments;
+    var likeppl = oldMessageData.likeppl;
     if (comment) {
       commentList.push(comment);
     } else {
-      likeCount++;
+      if (!likeppl.includes(sessionStorage.getItem("current_user"))) {
+        likeppl.push(sessionStorage.getItem("current_user"));
+        likeCount++;
+      }
+      else {
+        alert("why do you unlike it???");
+      }
     }
     //creating new message
     const message = {
@@ -31,6 +38,7 @@ function Profile() {
       numberOfLikes: likeCount,
       timeK: oldMessageData.timeK,
       comments: commentList,
+      likeppl: likeppl,
       _id: oldMessageData._id,
     };
     backEndConnect.post("/messages/update/" + oldMessageData._id, message);
@@ -192,7 +200,6 @@ function Profile() {
           messages: res.data.slice(),
         })
       })
-      console.log(this.state.messages);
       if (currentuserid === userid){
         return(
           <>

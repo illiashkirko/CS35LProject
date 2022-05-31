@@ -3,7 +3,7 @@
     border: 2px solid none;
 }
 #profdata{
-    border: 2px solid orange;
+    border: 2px solid #1671b2;
     border-radius: 15px;
     width: 40vw;
     margin: auto;
@@ -50,7 +50,7 @@ hr{
 .backHome{
     background-color: transparent;
     border: none;
-    font-family: cursive;
+    font-family:sans-serif;
     font-size: 200%;
     display:inline;
     color:white;
@@ -59,7 +59,7 @@ hr{
     margin:0.2%
 }
 .backHome:hover{
-    color:orange;
+    color:#1671b2;
     cursor: pointer;
     transform: scale(1.25);
     filter: brightness(120%);  
@@ -75,7 +75,7 @@ hr{
     text-align: center;
 }
 #proffbutton{
-    background-color: orange;
+    background-color: #1671b2;
     border: 1px solid rgb(47,49,55);
     border-radius: 3px;
     color: rgb(47,49,55);

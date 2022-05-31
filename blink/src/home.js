@@ -18,10 +18,17 @@ function Home() {
   function storeLikeOrComment(oldMessageData, comment = null) {
     var likeCount = oldMessageData.numberOfLikes;
     var commentList = oldMessageData.comments;
+    var likeppl = oldMessageData.likeppl;
     if (comment) {
       commentList.push(comment);
     } else {
-      likeCount++;
+      if (!likeppl.includes(sessionStorage.getItem("current_user"))) {
+        likeppl.push(sessionStorage.getItem("current_user"));
+        likeCount++;
+      }
+      else {
+        alert("why do you unlike it???");
+      }
     }
     //creating new message
     const message = {
@@ -30,6 +37,7 @@ function Home() {
       numberOfLikes: likeCount,
       timeK: oldMessageData.timeK,
       comments: commentList,
+      likeppl: likeppl,
       _id: oldMessageData._id,
     };
     backEndConnect.post("/messages/update/" + oldMessageData._id, message);
@@ -105,7 +113,7 @@ function Home() {
                   <td id="username"><b><p onClick={() => goToProfile(value.user)}>@{value.user}</p></b></td></tr>
                 <tr id="tweetrow"><td>{value.userMessages}</td>
                   <td id="commentbutton">
-                    <button id="like-button"
+                    <button
                     type="button"
                     onClick={() => toggleCommentBox(value._id)}>
                     <img id="comment-icon"
@@ -246,8 +254,15 @@ function Home() {
       this.updateMessages();
       return (
         <>
-        <dib> <h1>Hello {sessionStorage.getItem("current_user")}</h1></dib>
-        <div>
+        <div class="dropdown">
+          <button class="dropbtn"><p id = "intro">{sessionStorage.getItem("current_user")}</p><img id="pfp" src="pfpwhite.png" alt="pfp"></img></button>
+          <div class="dropdown-content">
+            <a onClick={() => goToProfile(sessionStorage.getItem("current_user"))}>My Profile</a>
+            <a href='/login' onClick={()=> {sessionStorage.removeItem("current_user"); 
+            sessionStorage.removeItem("current_user_id");}}>LOG OUT</a>
+          </div>
+        </div>
+
           <form onSubmit={this.handleSearchSubmit} id="inputForm">
             <label>
               <input
@@ -260,11 +275,6 @@ function Home() {
               <input id="searchButton" type="submit" value="Search" />
             </label>
           </form>
-          <a id="link" href='/'><u>LOG IN</u></a> 
-          <div> <a id="link" href='/signup'><u>SIGN UP</u></a> </div>
-          <div> <a id="link" href='/' onClick={()=> {sessionStorage.removeItem("current_user");
-                                                          sessionStorage.removeItem("current_user_id");}}><u>LOG OUT</u></a> </div>
-        </div>
           <form onSubmit={this.handleSubmit} id="inputForm">
             <label>
               <input
