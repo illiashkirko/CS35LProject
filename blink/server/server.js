@@ -8,7 +8,7 @@ const { application } = require('express');
 require('dotenv').config();
 
 const blinkApp = express ();
-const port = process.envPort|| 5045;
+const port = process.envPort|| 5049;
 
 blinkApp.use(cors());
 blinkApp.use(express.json());

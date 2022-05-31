@@ -2,10 +2,11 @@ import React from "react";
 import './signup.css'
 import { useForm } from "react-hook-form";
 import axios from 'axios'
+import myRoute from "./global_variables";
 
 function Signup(){
   const backEndConnect= axios.create({
-    baseURL : 'http://localhost:5045'
+    baseURL : 'http://localhost:'+myRoute
   }) 
 
   const {register, handleSubmit} = useForm();
