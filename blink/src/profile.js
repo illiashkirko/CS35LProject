@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import './profile.css'
 import axios from "axios";
-import myRoute from "./global_variables";
 
 
 
