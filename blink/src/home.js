@@ -157,7 +157,7 @@ function Home() {
     state = {
       value: "", // value of current message in text box
       textValue: [],
-      displayoption: 3,
+      displayoption: 1,
       search: "", // value to search
       currSearching: true, // indicates that the user can input search queries, false - if user submitted a query
     };
@@ -307,6 +307,8 @@ function Home() {
           
           <div>
             <input id="buttonLikes" type="submit" value="Sort by likes"onClick={() => this.sortByLikes()}>
+            </input>
+            <input id="buttonFollowing" type="submit" value="Filter by following"onClick={() => this.following()}>
             </input>
             <input id="buttonTime" type="submit" value="Sort by time" onClick={() => this.sortByTime()}>
             </input>
