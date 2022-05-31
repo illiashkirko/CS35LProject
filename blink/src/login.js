@@ -2,11 +2,11 @@ import React from "react";
 import './login.css'
 import { useForm } from "react-hook-form";
 import axios from 'axios'
-
+import myRoute from "./global_variables";
 
 function Login() {
   const backEndConnect= axios.create({
-    baseURL : 'http://localhost:5045'
+    baseURL : 'http://localhost:5050'
   }) 
 
   const {register, handleSubmit} = useForm();
@@ -21,7 +21,7 @@ function Login() {
           sessionStorage.setItem("current_user_id", res.data[0]._id);
           sessionStorage.setItem("current_user", d.UserName);
           alert("Succesful");
-          window.location.href = '/'; //go to mainpage
+          window.location.href = '/home'; //go to mainpage
       }
       else {
         alert("Wrong password!");

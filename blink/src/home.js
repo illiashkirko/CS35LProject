@@ -2,13 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./home.css";
 import axios from "axios";
+import myRoute from "./global_variables";
 
 function Home() {
   const backEndConnect = axios.create({
-    baseURL: "http://localhost:5045",
+    baseURL: "http://localhost:5050",
   });
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
+  function makecommentbox(){
+
+  }
   //increments like count or stores new comment
   function storeLikeOrComment(oldMessageData, comment = null) {
     var likeCount = oldMessageData.numberOfLikes;
@@ -97,15 +101,25 @@ function Home() {
             {value.map((value) => (
               <>
                 <tr key={value._id}>
-                  <td id="username"><u><p onClick={() => goToProfile(value.user)}>@{value.user}</p></u></td>
-                  <td>{value.userMessages}</td>
+                  <td id="username"><b><p onClick={() => goToProfile(value.user)}>@{value.user}</p></b></td></tr>
+                <tr id="tweetrow"><td>{value.userMessages}</td>
+                  <td id="commentbutton">
+                    <button id="like-button"
+                    type="button"
+                    onClick={() => makecommentbox()}>
+                    <img id="comment-icon"
+                    alt="comment button"
+                    src="commenticon.png"
+                    width="20em"
+                    ></img>
+                    </button>
+                  </td>
                   <td id="votingData">
                     <button
                       id="like-button"
                       type="button"
                       onClick={() => storeLikeOrComment(value)}
                     >
-                      {" "}
                       <img
                         id="like-icon"
                         alt="like button"
@@ -227,6 +241,7 @@ function Home() {
 
     render() {
       //backEndConnect.delete('/messages/'); // deletes all messages
+      //backEndConnect.delete('/users/'); // deletes all users
       this.updateMessages();
       return (
         <>

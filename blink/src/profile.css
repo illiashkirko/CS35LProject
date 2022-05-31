@@ -24,23 +24,7 @@
     width:50%;
     margin:0px;
 }
-/* #flist .flistitem{
-    display: inline;
-}
-#flist{
-    border: 1px solid hotpink;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    justify-content:space-around;
-}
-.flistitem{
-    border: 1px solid pink;
-    display: block;
-    text-align: center;
-} */
+
 #fdata{
     /* border: 1px solid hotpink; */
     width: 100%;

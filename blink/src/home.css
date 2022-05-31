@@ -227,10 +227,14 @@ tr{
 #like-button{
   background-color: transparent;
   border: none;
+  transition: all 0.5s ease;
+  transform: scale(1);
 }
 
 #like-button:hover{
-  background-color: white;
+  cursor: pointer;
+  transform: scale(1.25);
+  filter: brightness(120%);
   border: none;
 }
 
@@ -241,6 +245,8 @@ tr{
 #votingData{
   text-align: right;
   margin: none;
+  padding-left: -20px;
+  width:1%;
 }
 
 #link{
@@ -258,9 +264,24 @@ tr{
 
 #username{
   cursor: pointer;
-  color: aqua;
+  color: #d0f2f2;
+  font-size:large;
 }
 
 #username:hover {
-  color: orange;
+  text-decoration: underline;
+}
+
+#tweetrow{
+  border-top:none;
+}
+tr{
+  border-bottom:none;
+}
+
+#commentbutton{
+  float:right;
+  vertical-align: right;
+  transition: all 0.5s ease;
+  transform: scale(1);
 }

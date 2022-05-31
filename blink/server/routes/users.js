@@ -16,13 +16,14 @@ router.route('/add').post((req,res) => {
     const followers = req.body.followers;
     const following = req.body.following;
     const password = req.body.password;
-
+    const bio = req.body.bio;
     //creating new user based on data
     const newUsers = new Users({
         userName,
         followers,
         following,
-        password
+        password,
+        bio,
     });
 
     //saving message on db
@@ -32,14 +33,16 @@ router.route('/add').post((req,res) => {
 });
 //look up a user by its username - returns an array!
 router.route('/:userName').get((req, res) =>{
-    //console.log(req.params);
     Users.find({ userName: req.params.userName })
     .then(user => res.json(user))
     .catch(err=> res.status(400).json('Error' + err));
 })
 //look up a user by its id
 router.route('/id/:id').get((req, res) =>{
+<<<<<<< HEAD
     //console.log(req.params.id);
+=======
+>>>>>>> refs/remotes/origin/main
     Users.findById(req.params.id)
     .then(user => res.json(user))
     .catch(err=> res.status(400).json('Error' + err));
@@ -68,7 +71,7 @@ router.route('/update/:id').post((req, res)=> {
             users.followers = req.body.followers;
             users.following = req.body.following;
             users.password = req.body.password;
-
+            users.bio = req.body.bio;
             users.save()
                 .then(() => res.json('User updated!'))
                 .catch(err => res.status(400).json('Error: ' + err));
