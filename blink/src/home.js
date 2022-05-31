@@ -9,6 +9,9 @@ function Home() {
   });
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
+  function makecommentbox(){
+
+  }
   //increments like count or stores new comment
   function storeLikeOrComment(oldMessageData, comment = null) {
     var likeCount = oldMessageData.numberOfLikes;
@@ -97,15 +100,25 @@ function Home() {
             {value.map((value) => (
               <>
                 <tr key={value._id}>
-                  <td id="username"><u><p onClick={() => goToProfile(value.user)}>@{value.user}</p></u></td>
-                  <td>{value.userMessages}</td>
+                  <td id="username"><u><b><p onClick={() => goToProfile(value.user)}>@{value.user}</p></b></u></td></tr>
+                <tr id="tweetrow"><td>{value.userMessages}</td>
+                  <td>
+                    <button id="like-button"
+                    type="button"
+                    onClick={() => makecommentbox()}>
+                    <img id="comment-icon"
+                    alt="comment button"
+                    src=" https://cdn-icons-png.flaticon.com/512/25/25663.png"
+                    width="20em"
+                    ></img>
+                    </button>
+                  </td>
                   <td id="votingData">
                     <button
                       id="like-button"
                       type="button"
                       onClick={() => storeLikeOrComment(value)}
                     >
-                      {" "}
                       <img
                         id="like-icon"
                         alt="like button"
