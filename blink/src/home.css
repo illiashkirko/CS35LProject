@@ -137,11 +137,12 @@ code {
   width:50vw;
   border-collapse: collapse;
 }
-#commentForm{
+.commentForm{
+  display: none;
   background-color: rgb(59, 61, 68);
   border-radius: 5px;
   width: 20vw;
-  height:5vw;
+  height:2vw;
   color: white;
   outline:none;
   font-size:1.6vh;

@@ -3,15 +3,16 @@ import ReactDOM from "react-dom/client";
 import "./home.css";
 import axios from "axios";
 import myRoute from "./global_variables";
+import $ from 'jquery';
 
 function Home() {
   const backEndConnect = axios.create({
-    baseURL: "http://localhost:5050",
+    baseURL: "http://localhost:5053",
   });
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
-  function makecommentbox(){
-
+  function toggleCommentBox(message_id){
+    $("#"+message_id).toggle();
   }
   //increments like count or stores new comment
   function storeLikeOrComment(oldMessageData, comment = null) {
@@ -74,7 +75,7 @@ function Home() {
             <tr>
               <td onSubmit={this.handleSubmit}>
                 <form onSubmit={this.handleSubmit}>
-                  <input id="commentForm"
+                  <input class="commentForm" id = {this.props.messageData._id} 
                     type="text"
                     value={this.state.value}
                     onChange={this.handleChange}
@@ -106,7 +107,7 @@ function Home() {
                   <td id="commentbutton">
                     <button id="like-button"
                     type="button"
-                    onClick={() => makecommentbox()}>
+                    onClick={() => toggleCommentBox(value._id)}>
                     <img id="comment-icon"
                     alt="comment button"
                     src="commenticon.png"
