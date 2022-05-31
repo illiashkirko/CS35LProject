@@ -209,7 +209,6 @@ code {
   border-collapse: collapse;
 }
 .commentForm{
-  display: none;
   background-color: rgb(59, 61, 68);
   border-radius: 5px;
   width: 20vw;

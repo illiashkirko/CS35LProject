@@ -7,13 +7,28 @@ import $ from 'jquery';
 
 function Home() {
   const backEndConnect = axios.create({
-    baseURL: "http://localhost:5053",
+    baseURL: "http://localhost:5056",
   });
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
-  function toggleCommentBox(message_id){
-    $("#"+message_id).toggle();
+  const displayData = new Map();
+
+  function setdisplayData(message_id)
+  {
+    if(!displayData.get(message_id))
+      displayData.set(message_id,true);
+    else
+      displayData.set(message_id,false);
   }
+
+  function hideOrShow(message_id)
+  {
+      if (displayData.get(message_id))
+        return 'block';
+      else
+        return 'none';
+  }
+  
   //increments like count or stores new comment
   function storeLikeOrComment(oldMessageData, comment = null) {
     var likeCount = oldMessageData.numberOfLikes;
@@ -83,10 +98,11 @@ function Home() {
             <tr>
               <td onSubmit={this.handleSubmit}>
                 <form onSubmit={this.handleSubmit}>
-                  <input class="commentForm" id = {this.props.messageData._id} 
+                  <input class="commentForm" id = {this.props.messageData._id}  
                     type="text"
                     value={this.state.value}
                     onChange={this.handleChange}
+                    style={{display:hideOrShow(this.props.messageData._id)}}
                   />
                 </form>
               </td>
@@ -115,7 +131,7 @@ function Home() {
                   <td id="commentbutton">
                     <button
                     type="button"
-                    onClick={() => toggleCommentBox(value._id)}>
+                    onClick={() => setdisplayData(value._id)}>
                     <img id="comment-icon"
                     alt="comment button"
                     src="commenticon.png"
