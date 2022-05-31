@@ -14,8 +14,8 @@ function Signup(){
     //create new user
     const user = {
       userName: d.UserName,
-      followers: 0,
-      following: 0,
+      followers: [],
+      following: [],
       password: d.Password,
       bio: d.Bio,
     };
