@@ -2,19 +2,129 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import './profile.css'
 import axios from "axios";
+import myRoute from "./global_variables";
 
 
 
 function Profile() {
   const backEndConnect = axios.create({
-    baseURL: "http://localhost:5045",
+    baseURL: "http://localhost:5050",
   });
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
   let currentuserid = sessionStorage.getItem("current_user_id"); //retrieve globaly stored values
   let userid = sessionStorage.getItem("viewing_user_id");
-  let bio  = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum sem condimentum viverra pretium.";
-  
+  //let bio  = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum sem condimentum viverra pretium.";
+  //increments like count or stores new comment
+  function storeLikeOrComment(oldMessageData, comment = null) {
+    var likeCount = oldMessageData.numberOfLikes;
+    var commentList = oldMessageData.comments;
+    if (comment) {
+      commentList.push(comment);
+    } else {
+      likeCount++;
+    }
+    //creating new message
+    const message = {
+      user: oldMessageData.user,
+      userMessages: oldMessageData.userMessages,
+      numberOfLikes: likeCount,
+      timeK: oldMessageData.timeK,
+      comments: commentList,
+      _id: oldMessageData._id,
+    };
+    backEndConnect.post("/messages/update/" + oldMessageData._id, message);
+  }
+  //table of comments (each message has one)
+  class CommentTable extends React.Component {
+    state = {
+      value: "", // value of current message in text box
+    };
+
+    constructor(props) {
+      super(props);
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+      this.setState({ value: event.target.value });
+    }
+
+    handleSubmit(event) {
+      storeLikeOrComment(this.props.messageData, this.state.value); //send new comment to DB
+      this.setState({
+        value: "",
+      }); //clear value in text box
+      event.preventDefault();
+    }
+
+    render() {
+      return (
+        <table ref="myTable">
+          <tbody>
+            <tr>
+              <td onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
+                  <input id="commentForm"
+                    type="text"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                  />
+                </form>
+              </td>
+            </tr>
+            {this.props.messageData.comments.map((comments) => (
+              <tr>
+                <td>{comments}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    }
+  }
+  const Table = ({ value }) => {
+    return (
+      <>
+        <table id="messageTable">
+          <tbody>
+            {value.map((value) => (
+              <>
+                <tr key={value._id}>
+                  <td id="username"><u><p>@{value.user}</p></u></td>
+                  <td>{value.userMessages}</td>
+                  <td id="votingData">
+                    <button
+                      id="like-button"
+                      type="button"
+                      onClick={() => storeLikeOrComment(value)}
+                    >
+                      {" "}
+                      <img
+                        id="like-icon"
+                        alt="like button"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Facebook_Like_button.svg/1024px-Facebook_Like_button.svg.png"
+                        width="20em"
+                      />
+                    </button>
+                  </td>
+                  <td>{value.numberOfLikes}</td>
+                </tr>
+                {/* this row contains the table of comments */}
+                <tr key="commentsRow">
+                  <td>
+                    {" "}
+                    <CommentTable messageData={value} />
+                  </td>
+                </tr>
+              </>
+            ))}
+          </tbody>
+        </table>
+      </>
+    );
+  };
   class Bio extends React.Component {
     state = {
       userName: "", 
@@ -25,6 +135,9 @@ function Profile() {
       curruserfollowingCount: 0,
       userpassword: "",
       curruserpassword: "",
+      messages: [],
+      bio: "",
+      curruserbio: "",
     };
 
     follow()
@@ -34,6 +147,7 @@ function Profile() {
         following: this.state.followingCount,
         followers: this.state.followerCount + 1,
         password: this.state.userpassword,
+        bio: this.state.bio,
         _id: userid,
       };
       backEndConnect.post("/users/update/" + userid, upduser);
@@ -43,6 +157,7 @@ function Profile() {
         following: this.state.curruserfollowingCount + 1,
         followers: this.state.curruserfollowerCount,
         password: this.state.curruserpassword,
+        bio: this.state.curruserbio,
         _id: currentuserid,
       };
       backEndConnect.post("/users/update/" + currentuserid, updcurruser);
@@ -58,6 +173,7 @@ function Profile() {
           followerCount: res.data.followers,
           followingCount: res.data.following,
           userpassword: res.data.password,
+          bio: res.data.bio,
         })
       });
       backEndConnect.get("/users/id/" + currentuserid, currentuserid)
@@ -67,8 +183,16 @@ function Profile() {
           curruserfollowerCount: res.data.followers,
           curruserfollowingCount: res.data.following,
           curruserpassword: res.data.password,
+          curruserbio: res.data.bio,
         })
       });
+      backEndConnect.get("/messages/search/username/" + this.state.userName, this.state.userName)
+      .then((res) => {
+        this.setState({
+          messages: res.data.slice(),
+        })
+      })
+      console.log(this.state.messages);
       if (currentuserid === userid){
         return(
           <>
@@ -96,13 +220,14 @@ function Profile() {
                 </td>
               </tr>
               <tr>
-                <td colSpan="2" id="biodata"><div id="profbio">{bio}</div></td>
+                <td colSpan="2" id="biodata"><div id="profbio">{this.state.bio}</div></td>
               </tr>
             </table>
             </header>
             <br></br>
             <hr></hr>
           </div>
+          <Table value={this.state.messages} />
           </>
         );
       }
@@ -144,13 +269,14 @@ function Profile() {
                 </td>
               </tr>
               <tr>
-                <td colspan="2" id="biodata"><div id="profbio">{bio}</div></td>
+                <td colspan="2" id="biodata"><div id="profbio">{this.state.bio}</div></td>
               </tr>
             </table>
             </header>
             <br></br>
             <hr></hr>
           </div>
+          <Table value={this.state.messages} />
           </>
         );
       }

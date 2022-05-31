@@ -2,10 +2,11 @@ import React from "react";
 import './signup.css'
 import { useForm } from "react-hook-form";
 import axios from 'axios'
+import myRoute from "./global_variables";
 
 function Signup(){
   const backEndConnect= axios.create({
-    baseURL : 'http://localhost:5045'
+    baseURL : 'http://localhost:5050'
   }) 
 
   const {register, handleSubmit} = useForm();
@@ -17,7 +18,9 @@ function Signup(){
       followers: 0,
       following: 0,
       password: d.Password,
+      bio: d.Bio,
     };
+    console.log(user.bio);
     backEndConnect.get("/users/" + d.UserName, d.UserName)
     .then((res) => {
       if (res.data.length > 0) {
@@ -29,7 +32,7 @@ function Signup(){
         .then((res) => console.log(res.data));
         alert("Success!");
         //go to login page
-        window.location.href="/login";
+        window.location.href="/";
       }
     });
     
@@ -47,13 +50,13 @@ function Signup(){
             <label for="rpsw" class="logintext"><b>Re-enter password</b></label>
             <input type="password" placeholder="Re-enter password" name="rpsw"></input>
             <label for="bio" class="logintext"><b>Bio</b></label>
-            <input type="text" placeholder="Tell us about yourself" name="bio"></input>
+            <input type="text" placeholder="Tell us about yourself" name="bio"{...register("Bio")}></input>
             <button type="submit" class="logintext loginbutton">Sign Up</button>
           </div>
           <div class="logincontainer logincontainer2">
-            <button type="button" class="logincancelbtn loginbutton" onClick={() => {window.location.href='/';}}>Cancel</button>
+            <button type="button" class="logincancelbtn loginbutton" onClick={() => {window.location.href='/home';}}>Cancel</button>
             <ul class="psw">
-              <li class="loginli"><i><b>Have an account? </b></i><a id="linksignup" href='/login'><u>LOG IN</u></a></li>
+              <li class="loginli"><i><b>Have an account? </b></i><a id="linksignup" href='/'><u>LOG IN</u></a></li>
             </ul>
           </div>
         </form>
