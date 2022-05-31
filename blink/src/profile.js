@@ -136,10 +136,10 @@ function Profile() {
     state = {
       userName: "", 
       curruserName: "",
-      followerCount: 0,
-      followingCount: 0,
-      curruserfollowerCount: 0,
-      curruserfollowingCount: 0,
+      followers: [],
+      following: [],
+      curruserfollowers: [],
+      curruserfollowing: [],
       userpassword: "",
       curruserpassword: "",
       messages: [],
@@ -151,8 +151,8 @@ function Profile() {
     {
       const upduser = {
         userName: this.state.userName,
-        following: this.state.followingCount,
-        followers: this.state.followerCount + 1,
+        following: this.state.following,
+        followers: this.state.followers.concat(this.state.curruserName),
         password: this.state.userpassword,
         bio: this.state.bio,
         _id: userid,
@@ -161,8 +161,8 @@ function Profile() {
       
       const updcurruser = {
         userName: this.state.curruserName,
-        following: this.state.curruserfollowingCount + 1,
-        followers: this.state.curruserfollowerCount,
+        following: this.state.curruserfollowing.concat(this.state.userName),
+        followers: this.state.curruserfollowers,
         password: this.state.curruserpassword,
         bio: this.state.curruserbio,
         _id: currentuserid,
@@ -177,8 +177,8 @@ function Profile() {
       .then((res) => {
         this.setState({
           userName: res.data.userName,
-          followerCount: res.data.followers,
-          followingCount: res.data.following,
+          followers: res.data.followers,
+          following: res.data.following,
           userpassword: res.data.password,
           bio: res.data.bio,
         })
@@ -187,8 +187,8 @@ function Profile() {
       .then((res) => {
         this.setState({
           curruserName: res.data.userName,
-          curruserfollowerCount: res.data.followers,
-          curruserfollowingCount: res.data.following,
+          curruserfollowers: res.data.followers,
+          curruserfollowing: res.data.following,
           curruserpassword: res.data.password,
           curruserbio: res.data.bio,
         })
@@ -202,7 +202,7 @@ function Profile() {
       if (currentuserid === userid){
         return(
           <>
-          <form id="profform" action="/">
+          <form id="profform" action="/home">
             <input class="backHome" type="submit" value="Blink" />
           </form>
           <div>
@@ -218,8 +218,8 @@ function Profile() {
                         <td class="fdataitem"> Following </td>
                       </tr>
                       <tr>
-                        <td class="fdataitem"> {this.state.followerCount} </td>
-                        <td class="fdataitem"> {this.state.followingCount} </td>
+                        <td class="fdataitem"> {this.state.followers.length} </td>
+                        <td class="fdataitem"> {this.state.following.length} </td>
                       </tr>
                     </table>
                   </section>
@@ -240,7 +240,7 @@ function Profile() {
       else{
         return(
           <>
-          <form id="profform" action="/">
+          <form id="profform" action="/home">
             <input class="backHome" type="submit" value="Blink" />
           </form>
           <div>
@@ -267,8 +267,8 @@ function Profile() {
                         <td class="fdataitem"> Following </td>
                       </tr>
                       <tr>
-                        <td class="fdataitem"> {this.state.followerCount} </td>
-                        <td class="fdataitem"> {this.state.followingCount} </td>
+                        <td class="fdataitem"> {this.state.followers.length} </td>
+                        <td class="fdataitem"> {this.state.following.length} </td>
                       </tr>
                     </table>
                   </section>

@@ -173,7 +173,7 @@ function Home() {
     state = {
       value: "", // value of current message in text box
       textValue: [],
-      sortedByLikes: false, //by default sort by time (not by likes)
+      displayoption: 3,
       search: "", // value to search
       currSearching: true, // indicates that the user can input search queries, false - if user submitted a query
     };
@@ -230,14 +230,20 @@ function Home() {
     sortByLikes() {
       console.log("likesort");
       this.setState({
-        sortedByLikes: true,
+        displayoption: 2,
       });
     }
     sortByTime() {
       console.log("timesort");
       this.setState({
-        sortedByLikes: false,
+        displayoption: 1,
       });
+    }
+    following() {
+      console.log("display only following");
+      this.setState({
+        displayoption: 3,
+      })
     }
     updateMessages() {
       if (this.state.search !== "" && this.state.currSearching === false) {
@@ -248,18 +254,30 @@ function Home() {
               textValue: res.data.slice(), //instead of having an array with ambigous indecies, let's have a copy of the resulting dictionary
             });
           });
-      } else if (this.state.sortedByLikes === false) {
+      } else if (this.state.displayoption === 1) {
         backEndConnect.get("/messages/").then((res) => {
           this.setState({
             textValue: res.data.slice()
           });
         });
-      } else {
+      } else if (this.state.displayoption === 2) {
         backEndConnect.get("/messages/sortedbylikes").then((res) => {
           this.setState({
             textValue: res.data.slice(), 
           });
         });
+      } else {
+        let following = [];
+        let currentuserid = sessionStorage.getItem("current_user_id");
+        backEndConnect.get("/users/id/" + currentuserid, currentuserid)
+        .then((res) => {
+          following = res.data.following.slice();
+            backEndConnect.get("/messages/").then((res) => {
+                this.setState({
+                  textValue: res.data.filter(x => following.includes(x.user) ),
+                });}
+           );
+          });
       }
     }
 
