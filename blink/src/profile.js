@@ -145,31 +145,84 @@ function Profile() {
       messages: [],
       bio: "",
       curruserbio: "",
+      iffollowing: "Follow", //can be Follow or Unfollow
+      constuctorcalled: false,
     };
 
+    customconstr() {
+      if (!this.state.constuctorcalled && this.state.curruserName !== "")
+      {
+        if (this.state.followers.includes(this.state.curruserName)) {
+          this.setState({ iffollowing: "Unfollow" });
+        }
+        else {
+          this.setState({ iffollowing: "Follow"});
+        }
+        this.setState({
+          constuctorcalled: true,
+        })
+      }
+    }
     follow()
     {
-      const upduser = {
-        userName: this.state.userName,
-        following: this.state.following,
-        followers: this.state.followers.concat(this.state.curruserName),
-        password: this.state.userpassword,
-        bio: this.state.bio,
-        _id: userid,
-      };
-      backEndConnect.post("/users/update/" + userid, upduser);
-      
-      const updcurruser = {
-        userName: this.state.curruserName,
-        following: this.state.curruserfollowing.concat(this.state.userName),
-        followers: this.state.curruserfollowers,
-        password: this.state.curruserpassword,
-        bio: this.state.curruserbio,
-        _id: currentuserid,
-      };
-      backEndConnect.post("/users/update/" + currentuserid, updcurruser);
+      if (!this.state.followers.includes(this.state.curruserName))
+      {
+        this.setState({
+          iffollowing: "Unfollow",
+        });
+        const upduser = {
+          userName: this.state.userName,
+          following: this.state.following,
+          followers: this.state.followers.concat(this.state.curruserName),
+          password: this.state.userpassword,
+          bio: this.state.bio,
+          _id: userid,
+        };
+        
+        backEndConnect.post("/users/update/" + userid, upduser);
+        
+        const updcurruser = {
+          userName: this.state.curruserName,
+          following: this.state.curruserfollowing.concat(this.state.userName),
+          followers: this.state.curruserfollowers,
+          password: this.state.curruserpassword,
+          bio: this.state.curruserbio,
+          _id: currentuserid,
+        };
+        backEndConnect.post("/users/update/" + currentuserid, updcurruser);
+      }
+      else 
+      {
+        this.setState({
+          iffollowing: "Follow",
+        })
+        let followers = this.state.followers.slice()
+        followers.splice(followers.indexOf(this.state.curruserName), 1)
+        console.log(followers);
+        const upduser = {
+          userName: this.state.userName,
+          following: this.state.following,
+          followers: followers,
+          password: this.state.userpassword,
+          bio: this.state.bio,
+          _id: userid,
+        };
+        
+        backEndConnect.post("/users/update/" + userid, upduser);
+        let following = this.state.following.slice()
+        following.splice(following.indexOf(this.state.userName), 1)
+        const updcurruser = {
+          userName: this.state.curruserName,
+          following: following,
+          followers: this.state.curruserfollowers,
+          password: this.state.curruserpassword,
+          bio: this.state.curruserbio,
+          _id: currentuserid,
+        };
+        backEndConnect.post("/users/update/" + currentuserid, updcurruser);
+      }
     }
-    
+
     render() {
       currentuserid = sessionStorage.getItem("current_user_id");
       userid = sessionStorage.getItem("viewing_user_id");
@@ -199,6 +252,13 @@ function Profile() {
           messages: res.data.slice(),
         })
       })
+      this.customconstr();
+      /*if (this.state.followers.includes(this.state.curruserName)) {
+        this.setState({ iffollowing: "Unfollow" });
+      }
+      else {
+        this.setState({ iffollowing: "Follow"});
+      }*/
       if (currentuserid === userid){
         return(
           <>
@@ -254,8 +314,7 @@ function Profile() {
                         <td><p id="profusername">{this.state.userName}</p></td>
                       </tr>
                       <tr>
-                        <td id="proffbuttond"><button id="proffbutton" onClick={() => this.follow()}>Follow</button></td>
-                      </tr>
+                        <td id="proffbuttond"><button id="proffbutton" onClick={() => this.follow()}> {this.state.iffollowing}</button> </td></tr>
                     </table>
                   </div>
                 </td>
