@@ -17,7 +17,9 @@ function Signup(){
       followers: 0,
       following: 0,
       password: d.Password,
+      bio: d.Bio,
     };
+    console.log(user.bio);
     backEndConnect.get("/users/" + d.UserName, d.UserName)
     .then((res) => {
       if (res.data.length > 0) {
@@ -47,7 +49,7 @@ function Signup(){
             <label for="rpsw" class="logintext"><b>Re-enter password</b></label>
             <input type="password" placeholder="Re-enter password" name="rpsw"></input>
             <label for="bio" class="logintext"><b>Bio</b></label>
-            <input type="text" placeholder="Tell us about yourself" name="bio"></input>
+            <input type="text" placeholder="Tell us about yourself" name="bio"{...register("Bio")}></input>
             <button type="submit" class="logintext loginbutton">Sign Up</button>
           </div>
           <div class="logincontainer logincontainer2">

@@ -7,8 +7,8 @@ const usersSchema = new Schema({
     userName: {type: String, required: true},
     followers: {type: Number, required: true},
     following: {type: Number, required: true},
-    password: {type: String, required: true}
-
+    password: {type: String, required: true},
+    bio: {type: String, required: true},
 }, {
     timestamps:true,
 });

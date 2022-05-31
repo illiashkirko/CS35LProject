@@ -16,13 +16,14 @@ router.route('/add').post((req,res) => {
     const followers = req.body.followers;
     const following = req.body.following;
     const password = req.body.password;
-
+    const bio = req.body.bio;
     //creating new user based on data
     const newUsers = new Users({
         userName,
         followers,
         following,
         password,
+        bio,
     });
 
     //saving message on db
@@ -66,7 +67,7 @@ router.route('/update/:id').post((req, res)=> {
             users.followers = req.body.followers;
             users.following = req.body.following;
             users.password = req.body.password;
-
+            users.bio = req.body.bio;
             users.save()
                 .then(() => res.json('User updated!'))
                 .catch(err => res.status(400).json('Error: ' + err));

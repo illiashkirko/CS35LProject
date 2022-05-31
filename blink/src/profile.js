@@ -13,7 +13,7 @@ function Profile() {
 
   let currentuserid = sessionStorage.getItem("current_user_id"); //retrieve globaly stored values
   let userid = sessionStorage.getItem("viewing_user_id");
-  let bio  = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum sem condimentum viverra pretium.";
+  //let bio  = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum sem condimentum viverra pretium.";
   //increments like count or stores new comment
   function storeLikeOrComment(oldMessageData, comment = null) {
     var likeCount = oldMessageData.numberOfLikes;
@@ -135,6 +135,8 @@ function Profile() {
       userpassword: "",
       curruserpassword: "",
       messages: [],
+      bio: "",
+      curruserbio: "",
     };
 
     follow()
@@ -144,6 +146,7 @@ function Profile() {
         following: this.state.followingCount,
         followers: this.state.followerCount + 1,
         password: this.state.userpassword,
+        bio: this.state.bio,
         _id: userid,
       };
       backEndConnect.post("/users/update/" + userid, upduser);
@@ -153,6 +156,7 @@ function Profile() {
         following: this.state.curruserfollowingCount + 1,
         followers: this.state.curruserfollowerCount,
         password: this.state.curruserpassword,
+        bio: this.state.curruserbio,
         _id: currentuserid,
       };
       backEndConnect.post("/users/update/" + currentuserid, updcurruser);
@@ -168,6 +172,7 @@ function Profile() {
           followerCount: res.data.followers,
           followingCount: res.data.following,
           userpassword: res.data.password,
+          bio: res.data.bio,
         })
       });
       backEndConnect.get("/users/id/" + currentuserid, currentuserid)
@@ -177,6 +182,7 @@ function Profile() {
           curruserfollowerCount: res.data.followers,
           curruserfollowingCount: res.data.following,
           curruserpassword: res.data.password,
+          curruserbio: res.data.bio,
         })
       });
       backEndConnect.get("/messages/search/username/" + this.state.userName, this.state.userName)
@@ -213,7 +219,7 @@ function Profile() {
                 </td>
               </tr>
               <tr>
-                <td colSpan="2" id="biodata"><div id="profbio">{bio}</div></td>
+                <td colSpan="2" id="biodata"><div id="profbio">{this.state.bio}</div></td>
               </tr>
             </table>
             </header>
@@ -262,7 +268,7 @@ function Profile() {
                 </td>
               </tr>
               <tr>
-                <td colspan="2" id="biodata"><div id="profbio">{bio}</div></td>
+                <td colspan="2" id="biodata"><div id="profbio">{this.state.bio}</div></td>
               </tr>
             </table>
             </header>

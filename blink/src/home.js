@@ -240,6 +240,7 @@ function Home() {
 
     render() {
       //backEndConnect.delete('/messages/'); // deletes all messages
+      //backEndConnect.delete('/users/'); // deletes all users
       this.updateMessages();
       return (
         <>
