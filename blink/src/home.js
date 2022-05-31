@@ -104,7 +104,7 @@ function Home() {
                   <td id="username"><b><p onClick={() => goToProfile(value.user)}>@{value.user}</p></b></td></tr>
                 <tr id="tweetrow"><td>{value.userMessages}</td>
                   <td id="commentbutton">
-                    <button id="like-button"
+                    <button
                     type="button"
                     onClick={() => makecommentbox()}>
                     <img id="comment-icon"
