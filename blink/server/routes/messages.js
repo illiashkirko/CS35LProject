@@ -17,14 +17,23 @@ router.route('/sortedbylikes').get((req, res) => {
         //res.status(400).json('Error: ' + err);
     });    
  });
- //searches all messages by text
- router.route('/search/:text').get((req, res) =>{
+//searches all messages by text
+router.route('/search/:text').get((req, res) =>{
     Messages.find({ userMessages: { $regex: '.*'+req.params.text+'.*' }})
     .exec(function(err, messages) {
-      res.json(messages);
-      //res.status(400).json('Error: ' + err);
+        res.json(messages);
+        //res.status(400).json('Error: ' + err);
     });    
 });
+//searches all messages by username
+router.route('/search/username/:user').get((req, res) =>{
+    Messages.find({ user: { $regex: '^'+ req.params.user +'$' }})
+    .exec(function(err, messages) {
+        res.json(messages);
+        //res.status(400).json('Error: ' + err);
+    });    
+});
+
 
 
 //post requests, adding data to database

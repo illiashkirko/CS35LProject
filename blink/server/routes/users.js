@@ -22,7 +22,7 @@ router.route('/add').post((req,res) => {
         userName,
         followers,
         following,
-        password
+        password,
     });
 
     //saving message on db
@@ -32,14 +32,12 @@ router.route('/add').post((req,res) => {
 });
 //look up a user by its username - returns an array!
 router.route('/:userName').get((req, res) =>{
-    //console.log(req.params);
     Users.find({ userName: req.params.userName })
     .then(user => res.json(user))
     .catch(err=> res.status(400).json('Error' + err));
 })
 //look up a user by its id
 router.route('/id/:id').get((req, res) =>{
-    console.log(req.params.id);
     Users.findById(req.params.id)
     .then(user => res.json(user))
     .catch(err=> res.status(400).json('Error' + err));
