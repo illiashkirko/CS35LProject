@@ -8,7 +8,8 @@ var messagesSchema = new Schema({
     userMessages:{ type: String, required: true, index: true },
     numberOfLikes: {type: Number, required: true},
     timeK: {type: Date, required: true},
-    comments: {type: Array, required: true} 
+    comments: {type: Array, required: true}, 
+    likeppl: {type: Array, required: true},
 }, {
     timestamps:true,
 });
