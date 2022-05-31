@@ -187,9 +187,17 @@ tr{
 
 #username{
   cursor: pointer;
-  color: aqua;
+  color: #d0f2f2;
+  font-size:large;
 }
 
 #username:hover {
   color: orange;
+}
+
+#tweetrow{
+  border-top:none;
+}
+tr{
+  border-bottom:none;
 }
