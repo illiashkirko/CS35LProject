@@ -4,7 +4,8 @@
   Introduction\
   Library requirments\
   Set-up\
-  Troubleshooting
+  Troubleshooting\
+  Citations
   
 ## Introduction 
   This project contains the full source code for the back end and front end of the blink project.\
@@ -33,6 +34,7 @@
     As stated before add any necessary libraries if there are errors
     For port number change enter the src and server files and change the portNumber.js file to fit the portnumber needed. 
    ***Note that there is a chance the portnumber default will not work for the server, in this case, change the portnumber values in portNumber.js (in src and server respectively) to another port number(they should be the same). The src portnumber value is a string while the server a number type***
-    
-        
+ ## Citations
+ https://www.w3schools.com/howto/howto_css_dropdown.asp
+ 
     
