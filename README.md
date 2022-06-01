@@ -1,20 +1,19 @@
-BLink
-CS35L project
+# BLink CS35L project
 
-#Contents of this file:
+## Contents of this file
   Introduction
   Library requirments 
   Set-up 
   Troubleshooting 
   
-#Introduction 
+## Introduction 
   This project contains the full source code for the back end and front end of the blink project. 
   You will be able to actively engage with users on this website and also store and retrieve message data 
   It contains a server folder, that has the back end files and a src folder that has teh front end react files. 
   Addiotnionally on the front end there are four main pages, sign up, home, login and user page. 
   
  
- #Library requirments 
+ ## Library requirments 
   The requirements for this project in terms of node libraries are as follows-
     Back end 
       Moongose 
