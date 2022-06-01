@@ -48,12 +48,12 @@ function Signup(){
             <input type="password" placeholder="Enter Password" name="psw"{...register("Password")}></input>
             <label for="rpsw" class="logintext"><b>Re-enter password</b></label>
             <input type="password" placeholder="Re-enter password" name="rpsw"></input>
-            <label for="bio" class="logintext"><b>Bio</b></label>
+            <label for="bio" class="logintext"><b>Bio and interests</b></label>
             <input type="text" placeholder="Tell us about yourself" name="bio"{...register("Bio")}></input>
             <button type="submit" class="logintext loginbutton">Sign Up</button>
           </div>
           <div class="logincontainer logincontainer2">
-            <button type="button" class="logincancelbtn loginbutton" onClick={() => {window.location.href='/home';}}>Cancel</button>
+            <button type="button" class="logincancelbtn loginbutton" onClick={() => {window.location.href='/signup';}}>Cancel</button>
             <ul class="psw">
               <li class="loginli"><i><b>Have an account? </b></i><a id="linksignup" href='/'><u>LOG IN</u></a></li>
             </ul>

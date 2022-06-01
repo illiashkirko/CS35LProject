@@ -19,7 +19,7 @@ function Login() {
       } else if (res.data[0].password == d.Password) {
           sessionStorage.setItem("current_user_id", res.data[0]._id);
           sessionStorage.setItem("current_user", d.UserName);
-          alert("Succesful");
+          alert("Success!");
           window.location.href = '/home'; //go to mainpage
       }
       else {
@@ -47,7 +47,6 @@ function Login() {
       <button type="button" class="logincancelbtn loginbutton" onClick={() => {window.location.href='/';}}>Cancel</button>
       <ul class="psw">
         <li class="loginli"><i><b>Need an account? </b></i><a id="linksignup" href='/signup'><u>SIGN UP</u></a></li>
-        <li class="loginli"><a id="linksignup" href="./">Forgot password?</a></li>
       </ul>
     </div>
   </form>

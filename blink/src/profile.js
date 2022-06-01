@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import './profile.css'
 import axios from "axios";
-
+import $ from 'jquery';
 
 
 function Profile() {
@@ -43,6 +43,63 @@ function Profile() {
     backEndConnect.post("/messages/update/" + oldMessageData._id, message);
   }
   //table of comments (each message has one)
+  const displayData = new Map();
+
+  function setdisplayData(message_id)
+  {
+    if(!displayData.get(message_id))
+      displayData.set(message_id,true);
+    else
+      displayData.set(message_id,false);
+  }
+
+  function hideOrShow(message_id)
+  {
+      if (displayData.get(message_id))
+        return 'block';
+      else
+        return 'none';
+  }
+  
+  //increments like count or stores new comment
+  function storeLikeOrComment(oldMessageData, comment = null) {
+    var likeCount = oldMessageData.numberOfLikes;
+    var commentList = oldMessageData.comments;
+    var likeppl = oldMessageData.likeppl;
+    if (comment) {
+      commentList.push(comment);
+    } else {
+      if (!likeppl.includes(sessionStorage.getItem("current_user"))) {
+        likeppl.push(sessionStorage.getItem("current_user"));
+        likeCount++;
+      }
+      else {
+        alert("why do you unlike it???");
+      }
+    }
+    //creating new message
+    const message = {
+      user: oldMessageData.user,
+      userMessages: oldMessageData.userMessages,
+      numberOfLikes: likeCount,
+      timeK: oldMessageData.timeK,
+      comments: commentList,
+      likeppl: likeppl,
+      _id: oldMessageData._id,
+    };
+    backEndConnect.post("/messages/update/" + oldMessageData._id, message);
+  }
+  //changing to profile page
+  function goToProfile(userName) {
+    backEndConnect.get("/users/" + userName, userName)
+    .then((res) => {
+      sessionStorage.setItem("viewing_user", res.data[0].userName); //stores userinformation in global scope before going to their page
+      sessionStorage.setItem("viewing_user_id", res.data[0]._id);
+      window.location.href = '/profile/'+userName;
+    });
+    
+  }
+  //table of comments (each message has one)
   class CommentTable extends React.Component {
     state = {
       value: "", // value of current message in text box
@@ -73,10 +130,11 @@ function Profile() {
             <tr>
               <td onSubmit={this.handleSubmit}>
                 <form onSubmit={this.handleSubmit}>
-                  <input id="commentForm"
+                  <input class="commentForm" id = {this.props.messageData._id}  
                     type="text"
                     value={this.state.value}
                     onChange={this.handleChange}
+                    style={{display:hideOrShow(this.props.messageData._id)}}
                   />
                 </form>
               </td>
@@ -91,6 +149,7 @@ function Profile() {
       );
     }
   }
+  
   const Table = ({ value }) => {
     return (
       <>
@@ -99,15 +158,25 @@ function Profile() {
             {value.map((value) => (
               <>
                 <tr key={value._id}>
-                  <td id="username"><u><p>@{value.user}</p></u></td>
-                  <td>{value.userMessages}</td>
+                  <td id="username"><b><p onClick={() => goToProfile(value.user)}>@{value.user}</p></b></td></tr>
+                <tr id="tweetrow"><td>{value.userMessages}</td>
+                  <td id="commentbutton">
+                    <button
+                    type="button"
+                    onClick={() => setdisplayData(value._id)}>
+                    <img id="comment-icon"
+                    alt="comment button"
+                    src="commenticon.png"
+                    width="20em"
+                    ></img>
+                    </button>
+                  </td>
                   <td id="votingData">
                     <button
                       id="like-button"
                       type="button"
                       onClick={() => storeLikeOrComment(value)}
                     >
-                      {" "}
                       <img
                         id="like-icon"
                         alt="like button"
@@ -132,27 +201,20 @@ function Profile() {
       </>
     );
   };
+
   class Bio extends React.Component {
     state = {
-      userName: "", 
-      curruserName: "",
-      followers: [],
-      following: [],
-      curruserfollowers: [],
-      curruserfollowing: [],
-      userpassword: "",
-      curruserpassword: "",
       messages: [],
-      bio: "",
-      curruserbio: "",
       iffollowing: "Follow", //can be Follow or Unfollow
       constuctorcalled: false,
+      user: {_id: "", userName: "", following: [], followers: [], bio: ""},
+      curruser: {_id: "", userName: "", following: [], followers: [], bio: ""},
     };
 
     customconstr() {
-      if (!this.state.constuctorcalled && this.state.curruserName !== "")
+      if (!this.state.constuctorcalled && this.state.user.userName != "" && this.state.curruser.userName != "")
       {
-        if (this.state.followers.includes(this.state.curruserName)) {
+        if (this.state.user.followers.includes(this.state.curruser.userName)) {
           this.setState({ iffollowing: "Unfollow" });
         }
         else {
@@ -165,100 +227,43 @@ function Profile() {
     }
     follow()
     {
-      if (!this.state.followers.includes(this.state.curruserName))
+      let user = this.state.user;
+      let curruser = this.state.curruser;
+      if (this.state.iffollowing === "Follow")
       {
-        this.setState({
-          iffollowing: "Unfollow",
-        });
-        const upduser = {
-          userName: this.state.userName,
-          following: this.state.following,
-          followers: this.state.followers.concat(this.state.curruserName),
-          password: this.state.userpassword,
-          bio: this.state.bio,
-          _id: userid,
-        };
-        
-        backEndConnect.post("/users/update/" + userid, upduser);
-        
-        const updcurruser = {
-          userName: this.state.curruserName,
-          following: this.state.curruserfollowing.concat(this.state.userName),
-          followers: this.state.curruserfollowers,
-          password: this.state.curruserpassword,
-          bio: this.state.curruserbio,
-          _id: currentuserid,
-        };
-        backEndConnect.post("/users/update/" + currentuserid, updcurruser);
+        this.setState({ iffollowing: "Unfollow", });
+        user.followers.push(curruser.userName);
+        curruser.following.push(user.userName);        
+        backEndConnect.post("/users/update/" + this.state.user._id, user);
+        backEndConnect.post("/users/update/" + curruser._id, curruser);
       }
       else 
       {
-        this.setState({
-          iffollowing: "Follow",
-        })
-        let followers = this.state.followers.slice()
-        followers.splice(followers.indexOf(this.state.curruserName), 1)
-        console.log(followers);
-        const upduser = {
-          userName: this.state.userName,
-          following: this.state.following,
-          followers: followers,
-          password: this.state.userpassword,
-          bio: this.state.bio,
-          _id: userid,
-        };
-        
-        backEndConnect.post("/users/update/" + userid, upduser);
-        let following = this.state.following.slice()
-        following.splice(following.indexOf(this.state.userName), 1)
-        const updcurruser = {
-          userName: this.state.curruserName,
-          following: following,
-          followers: this.state.curruserfollowers,
-          password: this.state.curruserpassword,
-          bio: this.state.curruserbio,
-          _id: currentuserid,
-        };
-        backEndConnect.post("/users/update/" + currentuserid, updcurruser);
+        this.setState({ iffollowing: "Follow", });
+        user.followers.splice(user.followers.indexOf(curruser.userName), 1);
+        curruser.following.splice(curruser.following.indexOf(user.userName), 1);
+        backEndConnect.post("/users/update/" + user._id, user);
+        backEndConnect.post("/users/update/" + curruser._id, curruser);
       }
     }
-
     render() {
       currentuserid = sessionStorage.getItem("current_user_id");
       userid = sessionStorage.getItem("viewing_user_id");
       backEndConnect.get("/users/id/" + userid, userid)
       .then((res) => {
-        this.setState({
-          userName: res.data.userName,
-          followers: res.data.followers,
-          following: res.data.following,
-          userpassword: res.data.password,
-          bio: res.data.bio,
-        })
+        this.setState({ user: res.data, })
       });
       backEndConnect.get("/users/id/" + currentuserid, currentuserid)
       .then((res) => {
-        this.setState({
-          curruserName: res.data.userName,
-          curruserfollowers: res.data.followers,
-          curruserfollowing: res.data.following,
-          curruserpassword: res.data.password,
-          curruserbio: res.data.bio,
-        })
+        this.setState({ curruser: res.data, })
       });
-      backEndConnect.get("/messages/search/username/" + this.state.userName, this.state.userName)
+      backEndConnect.get("/messages/search/username/" + this.state.user.userName, this.state.user.userName)
       .then((res) => {
         this.setState({
           messages: res.data.slice(),
         })
       })
       this.customconstr();
-      /*if (this.state.followers.includes(this.state.curruserName)) {
-        this.setState({ iffollowing: "Unfollow" });
-      }
-      else {
-        this.setState({ iffollowing: "Follow"});
-      }*/
       if (currentuserid === userid){
         return(
           <>
@@ -269,24 +274,42 @@ function Profile() {
             <header id="profheader">
             <table id="profdata">
               <tr>
-                <td id = "profusercontainer" ><div id="divusername"><p id="profusername">{this.state.userName}</p></div></td>
+                <td id = "profusercontainer" >
+                  <div id="divusername">
+                    <p id="profusername">{this.state.user.userName}</p>
+                  </div>
+                </td>
                 <td>        
                   <section id="profnums">
                     <table id="fdata">
                       <tr>
-                        <td class="fdataitem"> Followers </td>
-                        <td class="fdataitem"> Following </td>
+                      <td>
+                        <div class="dropdown">
+                          <button class="dropbtn" id="followers">Followers</button>
+                          <div class="dropdown-content" id="dropdownfollowers">
+                            {this.state.user.followers.map((follower) => <a>{follower}</a>)}
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="dropdown">
+                          <button class="dropbtn" id="followers">Following</button>
+                          <div class="dropdown-content" id="dropdownfollowers">
+                            {this.state.user.following.map((follower) => <a>{follower}</a>)}
+                          </div>
+                        </div>
+                      </td>
                       </tr>
                       <tr>
-                        <td class="fdataitem"> {this.state.followers.length} </td>
-                        <td class="fdataitem"> {this.state.following.length} </td>
+                        <td class="fdataitem"> {this.state.user.followers.length} </td>
+                        <td class="fdataitem"> {this.state.user.following.length} </td>
                       </tr>
                     </table>
                   </section>
                 </td>
               </tr>
               <tr>
-                <td colSpan="2" id="biodata"><div id="profbio">{this.state.bio}</div></td>
+                <td colSpan="2" id="biodata"><div id="profbio">{this.state.user.bio}</div></td>
               </tr>
             </table>
             </header>
@@ -311,10 +334,11 @@ function Profile() {
                   <div id="divusername">
                     <table id="profuserfollow">
                       <tr>
-                        <td><p id="profusername">{this.state.userName}</p></td>
+                        <td><p id="profusername">{this.state.user.userName}</p></td>
                       </tr>
                       <tr>
-                        <td id="proffbuttond"><button id="proffbutton" onClick={() => this.follow()}> {this.state.iffollowing}</button> </td></tr>
+                        <td id="proffbuttond"><button id="proffbutton" onClick={() => this.follow()}> {this.state.iffollowing}</button> </td>
+                      </tr>
                     </table>
                   </div>
                 </td>
@@ -322,19 +346,33 @@ function Profile() {
                   <section id="profnums">
                     <table id="fdata">
                       <tr>
-                        <td class="fdataitem"> Followers </td>
-                        <td class="fdataitem"> Following </td>
+                      <td>
+                        <div class="dropdown">
+                          <button class="dropbtn" id="followers">Followers</button>
+                          <div class="dropdown-content" id="dropdownfollowers">
+                            {this.state.user.followers.map((follower) => <a>{follower}</a>)}
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="dropdown">
+                          <button class="dropbtn" id="followers">Following</button>
+                          <div class="dropdown-content" id="dropdownfollowers">
+                            {this.state.user.following.map((follower) => <a>{follower}</a>)}
+                          </div>
+                        </div>
+                      </td>
                       </tr>
                       <tr>
-                        <td class="fdataitem"> {this.state.followers.length} </td>
-                        <td class="fdataitem"> {this.state.following.length} </td>
+                        <td class="fdataitem"> {this.state.user.followers.length} </td>
+                        <td class="fdataitem"> {this.state.user.following.length} </td>
                       </tr>
                     </table>
                   </section>
                 </td>
               </tr>
               <tr>
-                <td colspan="2" id="biodata"><div id="profbio">{this.state.bio}</div></td>
+                <td colspan="2" id="biodata"><div id="profbio">{this.state.user.bio}</div></td>
               </tr>
             </table>
             </header>
