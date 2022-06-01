@@ -28,7 +28,7 @@ CS35L project
     ***Note you will most likely not have to add this libraries manually, but if the error asks you to do so please npm install [library name] in the folder src or server***
 
   #Set-up
-    For nod
+    For node modules, enter the src and server folders and for each enter npm install to load teh requried node files. Addiotnally as stated before add any necessary libraries. 
     
     
    #If 
