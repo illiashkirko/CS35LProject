@@ -130,6 +130,7 @@ function Home() {
                   <td id="commentbutton">
                     <button
                     type="button"
+                    id="button-comment"
                     onClick={() => setdisplayData(value._id)}>
                     <img id="comment-icon"
                     alt="comment button"
