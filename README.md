@@ -30,7 +30,7 @@ CS35L project
   #Set-up
     For node modules, enter the src and server folders enter npm install to load the requried node module files. Addiotnally as stated before add any necessary libraries. 
     For port number chnage enter the src and server files and change the portNumber.js file to fit the portnumber needed. 
-    ***Note that there is chance teh portnumber default will not eork for server, in this case, change teh portnumber values in portNumber.js (in src and server respectively). The src value is a string while teh server a number type***
+    ***Note that there is a chance the portnumber default will not work for the server, in this case, change the portnumber values in portNumber.js (in src and server respectively) to another port number(they should be the same). The src portnumber value is a string while the server a number type***
     
         
     
