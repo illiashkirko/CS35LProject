@@ -42,7 +42,8 @@ function Home() {
         likeCount++;
       }
       else {
-        alert("why do you unlike it???");
+        likeppl.splice(likeppl.indexOf(sessionStorage.getItem("current_user")), 1);
+        likeCount--;
       }
     }
     //creating new message
