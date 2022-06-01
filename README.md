@@ -24,12 +24,15 @@
  - axios
  - react-router-dom
      
-    ***Note you will most likely not have to add this libraries manually, but if the error asks you to do so please npm install [library name] in the folder src or server***
+    ***Note you will most likely not have to add this libraries manually, but if the error asks you to do so please npm install [library name] in the folder src or server Ex. npm install axios***
 
  # Set-up
-    For node modules, enter the src and server folders enter npm install to load the requried node module files. Additionally as stated before add any necessary libraries.
+   ##### For node modules
+    Enter blink with cd blink
+    Enter src and server folders with cd src and cd server in two different terminals and enter npm install in both to load the requried node module files.
+    As stated before add any necessary libraries if there are errors
     For port number change enter the src and server files and change the portNumber.js file to fit the portnumber needed. 
-    ***Note that there is a chance the portnumber default will not work for the server, in this case, change the portnumber values in portNumber.js (in src and server respectively) to another port number(they should be the same). The src portnumber value is a string while the server a number type***
+   ***Note that there is a chance the portnumber default will not work for the server, in this case, change the portnumber values in portNumber.js (in src and server respectively) to another port number(they should be the same). The src portnumber value is a string while the server a number type***
     
         
     
