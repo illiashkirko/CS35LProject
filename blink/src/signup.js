@@ -2,10 +2,11 @@ import React from "react";
 import './signup.css'
 import { useForm } from "react-hook-form";
 import axios from 'axios'
+import {portNumberSrc} from './portNumber'
 
 function Signup(){
   const backEndConnect= axios.create({
-    baseURL : 'http://localhost:5056'
+    baseURL : 'http://localhost:'+portNumberSrc
   }) 
 
   const {register, handleSubmit} = useForm();

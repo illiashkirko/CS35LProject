@@ -1,14 +1,13 @@
 // import myPort from "../src/global_variables.js";
 // console.log(myPort);
-
+const {portNumberServer}= require('./portNumber')
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const { application } = require('express');
 require('dotenv').config();
-
 const blinkApp = express ();
-const port = process.envPort|| 5056;
+const port = process.envPort|| portNumberServer;
 
 blinkApp.use(cors());
 blinkApp.use(express.json());

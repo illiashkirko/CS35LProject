@@ -3,11 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./home.css";
 import axios from "axios";
 import $ from 'jquery';
+import {portNumberSrc} from './portNumber'
 
 function Home() {
-  const backEndConnect = axios.create({
-    baseURL: "http://localhost:5056",
-  });
+  const backEndConnect= axios.create({
+    baseURL : 'http://localhost:'+portNumberSrc
+  }) 
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
   const displayData = new Map();

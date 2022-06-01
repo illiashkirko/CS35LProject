@@ -2,10 +2,10 @@ import React from "react";
 import './login.css'
 import { useForm } from "react-hook-form";
 import axios from 'axios'
-
+import {portNumberSrc} from './portNumber'
 function Login() {
   const backEndConnect= axios.create({
-    baseURL : 'http://localhost:5056'
+    baseURL : 'http://localhost:'+portNumberSrc
   }) 
 
   const {register, handleSubmit} = useForm();
@@ -14,9 +14,9 @@ function Login() {
 
     backEndConnect.get("/users/" + d.UserName, d.UserName)
     .then((res) => {
-      if (res.data.length == 0) {
+      if (res.data.length === 0) {
         alert("Username is not registered!");
-      } else if (res.data[0].password == d.Password) {
+      } else if (res.data[0].password === d.Password) {
           sessionStorage.setItem("current_user_id", res.data[0]._id);
           sessionStorage.setItem("current_user", d.UserName);
           alert("Success!");

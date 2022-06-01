@@ -3,12 +3,13 @@ import ReactDOM from "react-dom/client";
 import './profile.css'
 import axios from "axios";
 import $ from 'jquery';
+import {portNumberSrc} from './portNumber'
 
 
 function Profile() {
-  const backEndConnect = axios.create({
-    baseURL: "http://localhost:5056",
-  });
+  const backEndConnect= axios.create({
+    baseURL : 'http://localhost:'+portNumberSrc
+  }) 
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
   let currentuserid = sessionStorage.getItem("current_user_id"); //retrieve globaly stored values
@@ -212,7 +213,7 @@ function Profile() {
     };
 
     customconstr() {
-      if (!this.state.constuctorcalled && this.state.user.userName != "" && this.state.curruser.userName != "")
+      if (!this.state.constuctorcalled && this.state.user.userName !== "" && this.state.curruser.userName !== "")
       {
         if (this.state.user.followers.includes(this.state.curruser.userName)) {
           this.setState({ iffollowing: "Unfollow" });
