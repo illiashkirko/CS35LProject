@@ -17,20 +17,20 @@ CS35L project
  #Library requirments 
   The requirements for this project in terms of node libraries are as follows-
     Back end 
-     -Moongose 
-     -express
-     -cors
-     -env 
+      Moongose 
+      express
+      cors
+      env 
     Front end
-     -axios
-     -reacter-dom 
+      axios
+      reacter-dom 
      
     ***Note you will most likely not have to add this libraries manually, but if the error asks you to do so please npm install [library name] in the folder src or server***
 
   #Set-up
-    For node modules, enter the src and server folders and for each enter npm install to load teh requried node files. Addiotnally as stated before add any necessary libraries. 
+    For node modules, enter the src and server folders enter npm install to load the requried node module files. Addiotnally as stated before add any necessary libraries. 
+    For port number chnage enter the src and server files and change the portNumber.js file to fit the portnumber needed. 
+    ***Note that there is chance teh portnumber default will not eork for server, in this case, change teh portnumber values in portNumber.js (in src and server respectively). The src value is a string while teh server a number type***
     
-    
-   #If 
-    
+        
     
