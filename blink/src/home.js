@@ -119,7 +119,24 @@ function Home() {
       );
     }
   }
-  
+  function getImageNumber(userID){
+    let curruser= {_id: "", userName: "", following: [], followers: [], bio: "", imageNumber:0};
+    if(!userID){
+
+
+    }
+    else{
+    backEndConnect.get("/users/id/" + userID, userID)
+    .then((res) => {
+      console.log(res.data)
+      curruser=res.data
+        
+      
+    })
+  }
+    return curruser.imageNumber
+
+  }
   
   const Table = ({ value }) => {
     return (
@@ -131,10 +148,7 @@ function Home() {
                 <tr key={value._id}>
                   <td id="username"><b><p onClick={() => goToProfile(value.user)}>@{value.user}</p></b></td></tr>
                 <tr id="tweetrow"><td>{value.userMessages}</td>
-                <td id="imgTable">
-                           <img id="imgTable" src={imageLinks[2]} alt="pfp"></img>
-
-                </td>
+               
                   <td id="commentbutton">
                     <button
                     type="button"
