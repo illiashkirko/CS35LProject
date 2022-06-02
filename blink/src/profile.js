@@ -4,6 +4,7 @@ import './profile.css'
 import axios from "axios";
 import $ from 'jquery';
 import {portNumberSrc} from './portNumber'
+import {imageLinks} from './imageLinks'
 
 
 function Profile() {
@@ -266,10 +267,14 @@ function Profile() {
       })
       this.customconstr();
       if (currentuserid === userid){
+        
         return(
           <>
+           <img id="pfp" src={imageLinks[0]} alt="pfp"></img>
+
           <form id="profform" action="/home">
-            <input class="backHome" type="submit" value="Blink" />
+            <input class="backHome" type="submit" value="Blink"/>
+            
           </form>
           <div>
             <header id="profheader">
@@ -316,6 +321,7 @@ function Profile() {
             </header>
             <br></br>
             <hr></hr>
+            
           </div>
           <Table value={this.state.messages} />
           </>

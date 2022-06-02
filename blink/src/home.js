@@ -4,6 +4,7 @@ import "./home.css";
 import axios from "axios";
 import $ from 'jquery';
 import {portNumberSrc} from './portNumber'
+import {imageLinks} from './imageLinks'
 
 function Home() {
   const backEndConnect= axios.create({
@@ -178,6 +179,7 @@ function Home() {
       displayoption: 1,
       search: "", // value to search
       currSearching: true, // indicates that the user can input search queries, false - if user submitted a query
+      imageLinkNumber:'',
     };
 
     constructor(props) {
@@ -284,13 +286,21 @@ function Home() {
     }
 
     render() {
+
       //backEndConnect.delete('/messages/'); // deletes all messages
       //backEndConnect.delete('/users/'); // deletes all users
       this.updateMessages();
+      let currentuserid = sessionStorage.getItem("current_user_id");
+      backEndConnect.get("/users/id/"+ currentuserid, currentuserid).then((res) => {
+        this.setState({
+          imageLinkNumber:res.data.imageNumber,
+        })
+      });
       return (
         <>
         <div class="dropdown">
-          <button class="dropbtn"><p id = "intro">{sessionStorage.getItem("current_user")}</p><img id="pfp" src="pfpwhite.png" alt="pfp"></img></button>
+        <img id="pfp" src={imageLinks[this.state.imageLinkNumber]} class="imgProfile" ></img>
+          <button class="dropbtn"><p id = "intro">{sessionStorage.getItem("current_user")}</p></button>
           <div class="dropdown-content">
             <a onClick={() => goToProfile(sessionStorage.getItem("current_user"))}>My Profile</a>
             <a href='/' onClick={()=> {sessionStorage.removeItem("current_user"); 

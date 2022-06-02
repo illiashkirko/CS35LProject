@@ -323,3 +323,6 @@ tr{
   filter: brightness(120%);
   border: none;
 }
+#imgProfile {
+  border-radius: 50%;
+}

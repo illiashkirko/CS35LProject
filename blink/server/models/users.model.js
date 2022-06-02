@@ -9,6 +9,7 @@ const usersSchema = new Schema({
     following: {type: Array, required: true},
     password: {type: String, required: true},
     bio: {type: String, required: true},
+    imageNumber: {type: Number, required: true},
 }, {
     timestamps:true,
 });

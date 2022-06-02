@@ -9,14 +9,19 @@ router.route('/').get((reg, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+function randomInt(max) {  
+    return Math.floor(Math.random() * max);
+  }
 //post requests, adding data to database
 router.route('/add').post((req,res) => {
     //extracting data from request
+    console.log('attempt')
     const userName = req.body.userName;
     const followers = req.body.followers;
     const following = req.body.following;
     const password = req.body.password;
     const bio = req.body.bio;
+    const imageNumber=randomInt(6)
     //creating new user based on data
     const newUsers = new Users({
         userName,
@@ -24,6 +29,7 @@ router.route('/add').post((req,res) => {
         following,
         password,
         bio,
+        imageNumber,
     });
 
     //saving message on db
@@ -68,6 +74,7 @@ router.route('/update/:id').post((req, res)=> {
             users.following = req.body.following;
             users.password = req.body.password;
             users.bio = req.body.bio;
+            users.imageNumber= users.imageNumber;
             users.save()
                 .then(() => res.json('User updated!'))
                 .catch(err => res.status(400).json('Error: ' + err));
