@@ -225,14 +225,18 @@ function Profile() {
     }
     render() {
       currentuserid = sessionStorage.getItem("current_user_id");
-      userid = sessionStorage.getItem("viewing_user_id");
+      let userid = sessionStorage.getItem("viewing_user_id");
       backEndConnect.get("/users/id/" + userid, userid)
       .then((res) => {
-        this.setState({ user: res.data, })
+        this.setState({ user: res.data, 
+          imageLinkNumber:res.data.imageNumber,})
       });
       backEndConnect.get("/users/id/" + currentuserid, currentuserid)
       .then((res) => {
-        this.setState({ curruser: res.data, })
+        this.setState({ 
+          curruser: res.data, 
+          
+        })
       });
       backEndConnect.get("/messages/search/username/" + this.state.user.userName, this.state.user.userName)
       .then((res) => {
@@ -240,12 +244,6 @@ function Profile() {
           messages: res.data.slice(),
         })
       })
-      let currentuserid = sessionStorage.getItem("current_user_id");
-      backEndConnect.get("/users/id/"+ currentuserid, currentuserid).then((res) => {
-        this.setState({
-          imageLinkNumber:res.data.imageNumber,
-        })
-      });
       this.customconstr();
       if (currentuserid === userid){
         
@@ -311,6 +309,7 @@ function Profile() {
       else{
         return(
           <>
+          <img id="imgProfile" src={imageLinks[this.state.imageLinkNumber]} alt="pfp"></img>
           <form id="profform" action="/home">
             <input class="backHome" type="submit" value="Blink" />
           </form>
