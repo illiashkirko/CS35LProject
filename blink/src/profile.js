@@ -29,7 +29,8 @@ function Profile() {
         likeCount++;
       }
       else {
-        alert("why do you unlike it???");
+        likeppl.splice(likeppl.indexOf(sessionStorage.getItem("current_user")), 1);
+        likeCount--;
       }
     }
     //creating new message
@@ -63,34 +64,6 @@ function Profile() {
         return 'none';
   }
   
-  //increments like count or stores new comment
-  function storeLikeOrComment(oldMessageData, comment = null) {
-    var likeCount = oldMessageData.numberOfLikes;
-    var commentList = oldMessageData.comments;
-    var likeppl = oldMessageData.likeppl;
-    if (comment) {
-      commentList.push(comment);
-    } else {
-      if (!likeppl.includes(sessionStorage.getItem("current_user"))) {
-        likeppl.push(sessionStorage.getItem("current_user"));
-        likeCount++;
-      }
-      else {
-        alert("why do you unlike it???");
-      }
-    }
-    //creating new message
-    const message = {
-      user: oldMessageData.user,
-      userMessages: oldMessageData.userMessages,
-      numberOfLikes: likeCount,
-      timeK: oldMessageData.timeK,
-      comments: commentList,
-      likeppl: likeppl,
-      _id: oldMessageData._id,
-    };
-    backEndConnect.post("/messages/update/" + oldMessageData._id, message);
-  }
   //changing to profile page
   function goToProfile(userName) {
     backEndConnect.get("/users/" + userName, userName)
@@ -163,12 +136,13 @@ function Profile() {
                   <td id="username"><b><p onClick={() => goToProfile(value.user)}>@{value.user}</p></b></td></tr>
                 <tr id="tweetrow"><td>{value.userMessages}</td>
                   <td id="commentbutton">
-                    <button
+                  <button
                     type="button"
+                    id="button-comment"
                     onClick={() => setdisplayData(value._id)}>
                     <img id="comment-icon"
                     alt="comment button"
-                    src="commenticon.png"
+                    src={require("./commenticon.png")}
                     width="20em"
                     ></img>
                     </button>
@@ -293,7 +267,7 @@ function Profile() {
                         <div class="dropdown">
                           <button class="dropbtn" id="followers">Followers</button>
                           <div class="dropdown-content" id="dropdownfollowers">
-                            {this.state.user.followers.map((follower) => <a>{follower}</a>)}
+                            {this.state.user.followers.map((follower) => <a onClick={() => goToProfile(follower)}>{follower}</a>)}
                           </div>
                         </div>
                       </td>
@@ -301,7 +275,7 @@ function Profile() {
                         <div class="dropdown">
                           <button class="dropbtn" id="followers">Following</button>
                           <div class="dropdown-content" id="dropdownfollowers">
-                            {this.state.user.following.map((follower) => <a>{follower}</a>)}
+                            {this.state.user.following.map((follower) => <a onClick={() => goToProfile(follower)}>{follower}</a>)}
                           </div>
                         </div>
                       </td>
@@ -357,7 +331,7 @@ function Profile() {
                         <div class="dropdown">
                           <button class="dropbtn" id="followers">Followers</button>
                           <div class="dropdown-content" id="dropdownfollowers">
-                            {this.state.user.followers.map((follower) => <a>{follower}</a>)}
+                            {this.state.user.followers.map((follower) => <a onClick={() => goToProfile(follower)}>{follower}</a>)}
                           </div>
                         </div>
                       </td>
@@ -365,7 +339,7 @@ function Profile() {
                         <div class="dropdown">
                           <button class="dropbtn" id="followers">Following</button>
                           <div class="dropdown-content" id="dropdownfollowers">
-                            {this.state.user.following.map((follower) => <a>{follower}</a>)}
+                            {this.state.user.following.map((follower) => <a onClick={() => goToProfile(follower)}>{follower}</a>)}
                           </div>
                         </div>
                       </td>
