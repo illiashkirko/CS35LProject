@@ -251,7 +251,7 @@ function Profile() {
         
         return(
           <>
-           <img id="imgProfile" src={imageLinks[this.state.imageLinkNumber]} alt="pfp"></img>
+           <img id="imgProfile2nd" src={imageLinks[this.state.imageLinkNumber]} alt="pfp"></img>
 
           <form id="profform" action="/home">
             <input class="backHome" type="submit" value="Blink"/>

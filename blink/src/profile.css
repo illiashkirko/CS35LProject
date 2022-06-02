@@ -153,4 +153,8 @@ display: block;
     filter: brightness(120%);
     border: none;
   }
+  #imgProfile2nd {
+    border-radius: 50%;
+    width: 5%;
   
+  }
