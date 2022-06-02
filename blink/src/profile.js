@@ -185,6 +185,7 @@ function Profile() {
       constuctorcalled: false,
       user: {_id: "", userName: "", following: [], followers: [], bio: ""},
       curruser: {_id: "", userName: "", following: [], followers: [], bio: ""},
+      imageLinkNumber:"",
     };
 
     customconstr() {
@@ -239,12 +240,18 @@ function Profile() {
           messages: res.data.slice(),
         })
       })
+      let currentuserid = sessionStorage.getItem("current_user_id");
+      backEndConnect.get("/users/id/"+ currentuserid, currentuserid).then((res) => {
+        this.setState({
+          imageLinkNumber:res.data.imageNumber,
+        })
+      });
       this.customconstr();
       if (currentuserid === userid){
         
         return(
           <>
-           <img id="pfp" src={imageLinks[0]} alt="pfp"></img>
+           <img id="imgProfile" src={imageLinks[this.state.imageLinkNumber]} alt="pfp"></img>
 
           <form id="profform" action="/home">
             <input class="backHome" type="submit" value="Blink"/>

@@ -120,6 +120,7 @@ function Home() {
     }
   }
   
+  
   const Table = ({ value }) => {
     return (
       <>
@@ -130,6 +131,10 @@ function Home() {
                 <tr key={value._id}>
                   <td id="username"><b><p onClick={() => goToProfile(value.user)}>@{value.user}</p></b></td></tr>
                 <tr id="tweetrow"><td>{value.userMessages}</td>
+                <td id="imgTable">
+                           <img id="imgProfile" src={imageLinks[]} alt="pfp"></img>
+
+                </td>
                   <td id="commentbutton">
                     <button
                     type="button"
@@ -300,7 +305,7 @@ function Home() {
       return (
         <>
         <div class="dropdown">
-        <img id="pfp" src={imageLinks[this.state.imageLinkNumber]} class="imgProfile" ></img>
+        <img  src={imageLinks[this.state.imageLinkNumber]} id="imgProfile" ></img>
           <button class="dropbtn"><p id = "intro">{sessionStorage.getItem("current_user")}</p></button>
           <div class="dropdown-content">
             <a onClick={() => goToProfile(sessionStorage.getItem("current_user"))}>My Profile</a>

@@ -31,6 +31,7 @@ code {
 
 #pfp{
   width: 25px;
+
   /* border: 1px solid yellow; */
 }
 #intro{
@@ -38,6 +39,7 @@ code {
   font-size: 30px;
   display: inline;
   padding: 10px;
+  margin-top: 10px;
 }
 
 #spanIntro{
@@ -325,4 +327,12 @@ tr{
 }
 #imgProfile {
   border-radius: 50%;
+  margin: top 10px; ;
+  width: 70px;
+
+}
+#imgTable {
+  border-radius: 50%;
+  width: 70px;
+
 }
