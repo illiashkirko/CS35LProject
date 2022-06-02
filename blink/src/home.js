@@ -132,7 +132,7 @@ function Home() {
                   <td id="username"><b><p onClick={() => goToProfile(value.user)}>@{value.user}</p></b></td></tr>
                 <tr id="tweetrow"><td>{value.userMessages}</td>
                 <td id="imgTable">
-                           <img id="imgProfile" src={imageLinks[]} alt="pfp"></img>
+                           <img id="imgTable" src={imageLinks[2]} alt="pfp"></img>
 
                 </td>
                   <td id="commentbutton">
