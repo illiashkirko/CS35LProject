@@ -26,7 +26,10 @@
   Additionally on the front-end there are four main pages, sign up, home, login and profile page. 
 
  # Set-up
- Please do the following to set-up the Blink app.
+ You will need Node.js to run you app.
+ Please, install Node.js from the official website https://nodejs.org/en/download/.
+ 
+ Next, please do the following to set-up the Blink app.
 
 ```
 git clone https://github.com/illiashkirko/CS35LProject
@@ -51,11 +54,11 @@ If you have problems with port number:
 For port number change enter the src and server folders and change the portNumber.js file to fit the portnumber needed. 
    ***Note that there is a chance the portnumber default will not work for the server, in this case, change the portnumber values in portNumber.js (in src and server respectively) to another port number(they should be the same). The src portnumber value is a string while the server a number type***
  ## Citations
-- https://www.w3schools.com/howto/howto_css_dropdown.asp
-- https://github.com/beaucarnes/mern-exercise-tracker-mongodb
-- https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
-- https://www.mongodb.com/languages/mern-stack-tutorial
-- https://reactjs.org/docs/integrating-with-other-libraries.html
-- https://javascript.info/
-- https://www.w3schools.com/howto/howto_css_login_form.asp
-- https://reactjs.org/docs/create-a-new-react-app.html
+- https://www.w3schools.com/howto/howto_css_dropdown.asp describes useful information on Javasript dropdowns syntaxys.
+- Beau Carnes, Carlos Marchena, https://github.com/beaucarnes/mern-exercise-tracker-mongodb provides useful examples of MongoDB schemas.
+- https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669 gives a handy information about setting up sign in process using MERN.
+- https://www.mongodb.com/languages/mern-stack-tutorial provides an overview of how to use MERN with MongoDB.
+- https://reactjs.org/docs/integrating-with-other-libraries.html describes how to integrate ReactJS with jQuery.
+- https://javascript.info/ is an overview of Javascript programming language.
+- https://www.w3schools.com/howto/howto_css_login_form.asp gives useful resources to create a login form.
+- https://reactjs.org/docs/create-a-new-react-app.html is a step by step guide to how to create a react app.
