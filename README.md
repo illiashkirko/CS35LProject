@@ -41,12 +41,26 @@
     ***Note you will most likely not have to add this libraries manually, but if the error asks you to do so please npm install [library name] in the folder src or server Ex. npm install axios***
 
  # Set-up
- Please do the following in order to run the Blink app.
+ Please do the following to set-up the Blink app.
 
 ```
 git clone <link-to-repo>
-cd blink
+
 ```
+# Connecting to databse
+Please do the following to start the backend.
+```
+cd CS35LProject/blink/server
+npm start
+```
+
+# Runing the app
+Please do the following to run the Blink app.
+```
+cd CS35LProject/Blink
+npm start
+```
+
    ##### For node modules
     Enter blink with cd blink
     Enter src and server folders with cd src and cd server in two different terminals and enter npm install in both to load the requried node module files.
