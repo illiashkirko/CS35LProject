@@ -1,3 +1,5 @@
+<img src="/blink/public/B-LinkLogo.png" width="100" height="100">
+
 # BLink CS35L project
 
 ## Contents of this file
