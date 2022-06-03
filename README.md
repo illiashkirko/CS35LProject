@@ -53,7 +53,7 @@ cd CS35LProject/blink/server
 npm start
 ```
 
-# Runing the app
+# Running the app
 Please do the following to run the Blink app.
 ```
 cd CS35LProject/Blink
