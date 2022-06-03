@@ -321,9 +321,9 @@ function Home() {
      
       return (
         <>
-        <span id = "logo-container">
-          <img id = "blink-logo" src = "B-LinkLogo.png" alt = "blink-logo"></img>
-        </span>
+        <a href = "/home"><span id = "logo-container">
+          <img id = "blink-logo" src = "../B-LinkLogo.png" alt = "blink-logo"></img>
+        </span></a>
         <div id="home-dropdown">
           <button id="home-dropbtn"><p id = "intro">{sessionStorage.getItem("current_user")}</p></button>
           <div id="home-dropdown-content">

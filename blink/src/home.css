@@ -38,6 +38,12 @@ code {
   /* border: 1px solid red; */
   display:inline-flex;
   padding: 10px;
+  transition: all 0.5s ease;
+  transform: scale(1);
+}
+#logo-container:hover {
+  transform: scale(1.25);
+  filter: brightness(120%);
 }
 #blink-logo {
   position: aboslute;
