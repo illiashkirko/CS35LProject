@@ -208,6 +208,12 @@ function Home() {
       this.handleSubmit = this.handleSubmit.bind(this); // handles when you click the submit button
       this.handleSearchChange = this.handleSearchChange.bind(this);
       this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+      let currentuserid = sessionStorage.getItem("current_user_id");
+      backEndConnect.get("/users/id/"+ currentuserid, currentuserid).then((res) => {
+        this.setState({
+          imageLinkNumber:res.data.imageNumber,
+        })
+      });
     }
 
     handleChange(event) {
@@ -310,12 +316,7 @@ function Home() {
       //backEndConnect.delete('/messages/'); // deletes all messages
       //backEndConnect.delete('/users/'); // deletes all users
       this.updateMessages();
-      let currentuserid = sessionStorage.getItem("current_user_id");
-      backEndConnect.get("/users/id/"+ currentuserid, currentuserid).then((res) => {
-        this.setState({
-          imageLinkNumber:res.data.imageNumber,
-        })
-      });
+     
       return (
         <>
         <div class="dropdown">

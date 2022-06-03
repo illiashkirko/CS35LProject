@@ -187,7 +187,17 @@ function Profile() {
       curruser: {_id: "", userName: "", following: [], followers: [], bio: ""},
       imageLinkNumber:"",
     };
+    constructor(props) {
+      super(props);
+      currentuserid = sessionStorage.getItem("current_user_id");
+      let userid = sessionStorage.getItem("viewing_user_id");
+      backEndConnect.get("/users/id/" + userid, userid)
+      .then((res) => {
+        this.setState({ user: res.data, 
+          imageLinkNumber:res.data.imageNumber,})
+      });
 
+    }
     customconstr() {
       if (!this.state.constuctorcalled && this.state.user.userName !== "" && this.state.curruser.userName !== "")
       {
@@ -224,13 +234,7 @@ function Profile() {
       }
     }
     render() {
-      currentuserid = sessionStorage.getItem("current_user_id");
-      let userid = sessionStorage.getItem("viewing_user_id");
-      backEndConnect.get("/users/id/" + userid, userid)
-      .then((res) => {
-        this.setState({ user: res.data, 
-          imageLinkNumber:res.data.imageNumber,})
-      });
+     
       backEndConnect.get("/users/id/" + currentuserid, currentuserid)
       .then((res) => {
         this.setState({ 
