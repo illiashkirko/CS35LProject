@@ -31,6 +31,7 @@ function Home() {
   }
   
   //increments like count or stores new comment
+  
   function storeLikeOrComment(oldMessageData, comment = null) {
     var likeCount = oldMessageData.numberOfLikes;
     var commentList = oldMessageData.comments;
@@ -85,8 +86,9 @@ function Home() {
       this.setState({ value: event.target.value });
     }
 
-    handleSubmit(event) {
-      storeLikeOrComment(this.props.messageData, this.state.value); //send new comment to DB
+     handleSubmit(event) {
+      
+     storeLikeOrComment(this.props.messageData, this.state.value); //send new comment to DB
       this.setState({
         value: "",
       }); //clear value in text box
@@ -98,7 +100,7 @@ function Home() {
         <table ref="myTable">
           <tbody>
             <tr>
-              <td onSubmit={this.handleSubmit}>
+              <td >
                 <form onSubmit={this.handleSubmit}>
                   <input class="commentForm" id = {this.props.messageData._id}  
                     type="text"
