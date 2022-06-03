@@ -44,7 +44,7 @@
  Please do the following in order to run the Blink app.
 
 ```
-git clone 
+git clone <link-to-repo>
 cd blink
 ```
    ##### For node modules
