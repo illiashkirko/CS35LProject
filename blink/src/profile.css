@@ -154,7 +154,11 @@ display: block;
     border: none;
   }
   #imgProfile2nd {
+    width: 50px; 
     border-radius: 50%;
-    width: 5%;
+    height: 50px; 
+    object-fit: cover;
+    object-position: 20% 10%; 
+    border: 5px solid black;
+    }
   
-  }

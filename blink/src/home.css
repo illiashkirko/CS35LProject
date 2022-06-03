@@ -326,10 +326,15 @@ tr{
   border: none;
 }
 #imgProfile {
+  width: 50px; 
   border-radius: 50%;
-  width: 25%;
+  height: 50px; 
+  object-fit: cover;
+  object-position: 20% 10%; 
+  border: 5px solid black;
+  }
 
-}
+
 #imgTable {
   border-radius: 50%;
   width: 25%;
