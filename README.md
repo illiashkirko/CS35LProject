@@ -54,8 +54,8 @@ cd blink
     For port number change enter the src and server files and change the portNumber.js file to fit the portnumber needed. 
    ***Note that there is a chance the portnumber default will not work for the server, in this case, change the portnumber values in portNumber.js (in src and server respectively) to another port number(they should be the same). The src portnumber value is a string while the server a number type***
  ## Citations
- https://www.w3schools.com/howto/howto_css_dropdown.asp
- https://github.com/beaucarnes/mern-exercise-tracker-mongodb
- https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
+- https://www.w3schools.com/howto/howto_css_dropdown.asp
+- https://github.com/beaucarnes/mern-exercise-tracker-mongodb
+- https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
  
     
