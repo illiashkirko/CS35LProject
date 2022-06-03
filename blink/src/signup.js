@@ -43,15 +43,15 @@ function Signup(){
         <h4>Connect with the UCLA Blink Community</h4>
         <form class="loginform" onSubmit= {handleSubmit(onSubmit)}>
           <div class="logincontainer">
-            <label for="uname" class="logintext"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname"{...register("UserName")}></input>
-            <label for="psw" class="logintext"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw"{...register("Password")}></input>
-            <label for="rpsw" class="logintext"><b>Re-enter password</b></label>
-            <input type="password" placeholder="Re-enter password" name="rpsw"></input>
-            <label for="bio" class="logintext"><b>Bio and interests</b></label>
-            <input type="text" placeholder="Tell us about yourself" name="bio"{...register("Bio")}></input>
-            <button type="submit" class="logintext loginbutton">Sign Up</button>
+            <label for="uname"><b>Username</b></label>
+            <input type="text" class="login-input" placeholder="Enter Username" name="uname"{...register("UserName")}></input>
+            <label for="psw" ><b>Password</b></label>
+            <input type="password" class="login-input"  placeholder="Enter Password" name="psw"{...register("Password")}></input>
+            <label for="rpsw" ><b>Re-enter password</b></label>
+            <input type="password"class="login-input"  placeholder="Re-enter password" name="rpsw"></input>
+            <label for="bio" ><b>Bio and interests</b></label>
+            <input type="text"class="login-input"  placeholder="Tell us about yourself" name="bio"{...register("Bio")}></input>
+            <button type="submit" class="loginbutton">Sign Up</button>
           </div>
           <div class="logincontainer logincontainer2">
             <button type="button" class="logincancelbtn loginbutton" onClick={() => {window.location.href='/signup';}}>Cancel</button>
