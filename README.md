@@ -52,7 +52,7 @@ Now start the backend server on a new terminal.
 cd CS35LProject/blink/server
 npm start
 ``` 
-   ***Note that there is a chance the portnumber default will not work for the server, in this case, change the portnumber values in portNumber.js (in src and server respectively) to another port number(they should be the same). The src portnumber value is a string while the server a number type***
+   ***Note that there is a chance the portnumber default will not work for the server, in this case, change the portnumber values in portNumber.js (in src and server respectively) to another port number (they should be the same).***
  ## Citations
 - https://www.w3schools.com/howto/howto_css_dropdown.asp describes useful information on Javasript dropdowns syntaxys.
 - Beau Carnes and Carlos Marchena's https://github.com/beaucarnes/mern-exercise-tracker-mongodb provides useful examples of MongoDB schemas.
