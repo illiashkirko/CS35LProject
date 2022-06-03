@@ -3,9 +3,8 @@
 ## Contents of this file
 *  Overview
 *  Introduction
-*  Library requirments
 *  Set-up
-*  Troubleshooting
+*  Running the app
 *  Citations
 
 ## Overview
