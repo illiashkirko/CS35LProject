@@ -27,7 +27,7 @@
   
  
  ## Library requirments 
-  The requirements for this project in terms of node libraries are as follows:\
+  The requirements for this project in terms of node libraries are as follows:
  ### Back-end
  - Node.js
  - Moongose
@@ -44,8 +44,7 @@
  Please do the following to set-up the Blink app.
 
 ```
-git clone <link-to-repo>
-
+git clone https://github.com/illiashkirko/CS35LProject
 ```
 # Connecting to databse
 Please do the following to start the backend.
@@ -54,22 +53,26 @@ cd CS35LProject/blink/server
 npm start
 ```
 
-# Runing the app
+# Running the app
 Please do the following to run the Blink app.
 ```
 cd CS35LProject/Blink
 npm start
 ```
 
-   ##### For node modules
-    Enter blink with cd blink
-    Enter src and server folders with cd src and cd server in two different terminals and enter npm install in both to load the requried node module files.
-    As stated before add any necessary libraries if there are errors
-    For port number change enter the src and server files and change the portNumber.js file to fit the portnumber needed. 
+   ### For node modules
+    - Enter blink with cd blink
+    - Enter src and server folders with cd src and cd server in two different terminals 
+    - enter npm install in both to load the requried node module files.
+    - As stated before add any necessary libraries if there are errors
+    - For port number change enter the src and server files and change the portNumber.js file to fit the portnumber needed. 
    ***Note that there is a chance the portnumber default will not work for the server, in this case, change the portnumber values in portNumber.js (in src and server respectively) to another port number(they should be the same). The src portnumber value is a string while the server a number type***
  ## Citations
 - https://www.w3schools.com/howto/howto_css_dropdown.asp
 - https://github.com/beaucarnes/mern-exercise-tracker-mongodb
 - https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
- 
-    
+- https://www.mongodb.com/languages/mern-stack-tutorial
+- https://reactjs.org/docs/integrating-with-other-libraries.html
+- https://javascript.info/
+- https://www.w3schools.com/howto/howto_css_login_form.asp
+- https://reactjs.org/docs/create-a-new-react-app.html
