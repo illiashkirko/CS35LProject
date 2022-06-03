@@ -71,5 +71,8 @@ npm start
 - https://www.w3schools.com/howto/howto_css_dropdown.asp
 - https://github.com/beaucarnes/mern-exercise-tracker-mongodb
 - https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
- 
-    
+- https://www.mongodb.com/languages/mern-stack-tutorial
+- https://reactjs.org/docs/integrating-with-other-libraries.html
+- https://javascript.info/
+- https://www.w3schools.com/howto/howto_css_login_form.asp
+- https://reactjs.org/docs/create-a-new-react-app.html
