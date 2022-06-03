@@ -34,10 +34,10 @@ function Login() {
   <form class="loginform" onSubmit = {handleSubmit(onSubmit)}>
     <div class="logincontainer">
       <label for="uname" class="logintext"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname"{...register("UserName")}></input>
+      <input class="login-input" type="text" placeholder="Enter Username" name="uname"{...register("UserName")}></input>
   
       <label for="psw" class="logintext"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw"{...register("Password")}></input>
+      <input class="login-input" type="password" placeholder="Enter Password" name="psw"{...register("Password")}></input>
       <button type="submit" class="logintext loginbutton">Login</button>
       <label class="logintext">
         <input type="checkbox" name="remember"></input>Remember me

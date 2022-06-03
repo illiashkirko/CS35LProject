@@ -334,21 +334,23 @@ function Home() {
           <img  src={imageLinks[this.state.imageLinkNumber]} id="imgProfile" ></img>
         </div>
 
-          <form onSubmit={this.handleSearchSubmit} id="inputForm">
-            <label>
-              <input
-                id="searchInput"
-                placeholder="What do you want to look up?"
-                type="text"
-                value={this.state.search}
-                onChange={this.handleSearchChange}
-              />
-              <input id="searchButton" type="submit" value="Search" />
-            </label>
-          </form>
+        <form onSubmit={this.handleSearchSubmit}>
+          <div class="bar">
+            <input class="searchbar" 
+            type="text" 
+            title="Search"
+            id="searchInput"
+            placeholder="What do you want to look up?"
+            value={this.state.search}
+            onChange={this.handleSearchChange}></input>
+            <input type="image" class="search-icon" src="searchicon.png" onSubmit={this.handleSearchSubmit} onClick={this.handleSearchSubmit}></input>
+          </div>
+        </form>
+
           <form onSubmit={this.handleSubmit} id="inputForm">
             <label>
               <input
+                class = "login-input"
                 id="tweetInput"
                 placeholder="What's on your mind?"
                 type="text"

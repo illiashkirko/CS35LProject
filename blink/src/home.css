@@ -36,6 +36,7 @@ code {
 #logo-container {
   position: absolute;
   /* border: 1px solid red; */
+  top: -5px;
   display:inline-flex;
   padding: 10px;
   transition: all 0.5s ease;
@@ -91,6 +92,7 @@ code {
   right:0%;
   padding-right: 8px;
   padding-top: 8px;
+  top: -5px;
   /* border: 1px solid orange; */
 }
 
@@ -364,4 +366,38 @@ tr{
   width: 25%;
   margin-left: 100%;
 
+}
+
+.bar{
+  margin:0 auto;
+  width:50vw;
+  border-radius:30px;
+  border:1px solid #dcdcdc;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.bar:hover{
+  box-shadow: 1px 1px 8px 1px #dcdcdc;
+}
+.bar:focus-within{
+  box-shadow: 1px 1px 8px 1px #dcdcdc;
+  outline:none;
+}
+.searchbar{
+  color:white;
+  height:45px;
+  border:none;
+  width:45vw;
+  position:relative;
+  left:20px;
+  font-size:16px;
+  outline: none;
+  background-color:transparent;
+}
+.search-icon{
+  cursor:pointer;
+  height: 3vh;
+  position:relative;
+  top:1vh;
+  left:2vw;
 }
