@@ -29,12 +29,26 @@ code {
   color: white;
 }
 
-#pfp{
+/* #pfp{
   width: 25px;
-
-  /* border: 1px solid yellow; */
+  border: 1px solid yellow;
+} */
+#logo-container {
+  position: absolute;
+  /* border: 1px solid red; */
+  display:inline-flex;
+  padding: 10px;
 }
+#blink-logo {
+  position: aboslute;
+  /* border: 1px solid orange; */
+  width: 50px;
+  display: inline;
+}
+
 #intro{
+  position: relative;
+  top: -15px;
   /* border: 1px solid mediumaquamarine; */
   font-size: 30px;
   display: inline;
@@ -43,18 +57,28 @@ code {
 }
 
 #spanIntro{
-  border: 1px solid red;
+  /* border: 1px solid red; */
   padding: 0%;
 }
 
-.dropbtn {
+#imgProfile {
+  width: 50px; 
+  border-radius: 50%;
+  height: 50px; 
+  object-fit: cover;
+  object-position: 20% 10%; 
+  border: 2px solid black;
+}
+
+#home-dropbtn {
   background-color: transparent;
   color: white;
   border: none;
   display: inline;
+  /* border: 1px solid red; */
 }
 
-.dropdown {
+#home-dropdown {
   position: relative;
   display: inline-block;
   position: absolute;
@@ -64,25 +88,25 @@ code {
   /* border: 1px solid orange; */
 }
 
-.dropdown-content {
+#home-dropdown-content {
   display: none;
   position: absolute;
-  left:15%;
+  right:10%;
   background-color: #f1f1f1;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
-.dropdown-content a {
+#home-dropdown-content a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #ddd;}
+#home-dropdown-content a:hover {background-color: #ddd;}
 
-.dropdown:hover .dropdown-content {display: block;}
+#home-dropdown:hover #home-dropdown-content {display: block;}
 
 
 
@@ -326,14 +350,7 @@ tr{
   filter: brightness(120%);
   border: none;
 }
-#imgProfile {
-  width: 50px; 
-  border-radius: 50%;
-  height: 50px; 
-  object-fit: cover;
-  object-position: 20% 10%; 
-  border: 5px solid black;
-  }
+
 
 
 #imgTable {

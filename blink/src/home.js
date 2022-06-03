@@ -321,14 +321,17 @@ function Home() {
      
       return (
         <>
-        <div class="dropdown">
-        <img  src={imageLinks[this.state.imageLinkNumber]} id="imgProfile" ></img>
-          <button class="dropbtn"><p id = "intro">{sessionStorage.getItem("current_user")}</p></button>
-          <div class="dropdown-content">
+        <span id = "logo-container">
+          <img id = "blink-logo" src = "B-LinkLogo.png" alt = "blink-logo"></img>
+        </span>
+        <div id="home-dropdown">
+          <button id="home-dropbtn"><p id = "intro">{sessionStorage.getItem("current_user")}</p></button>
+          <div id="home-dropdown-content">
             <a onClick={() => goToProfile(sessionStorage.getItem("current_user"))}>My Profile</a>
             <a href='/' onClick={()=> {sessionStorage.removeItem("current_user"); 
             sessionStorage.removeItem("current_user_id");}}>LOG OUT</a>
           </div>
+          <img  src={imageLinks[this.state.imageLinkNumber]} id="imgProfile" ></img>
         </div>
 
           <form onSubmit={this.handleSearchSubmit} id="inputForm">
