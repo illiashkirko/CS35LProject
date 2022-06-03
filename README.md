@@ -44,7 +44,7 @@
  Please do the following to set-up the Blink app.
 
 ```
-git clone <link-to-repo>
+git clone [https://github.com/illiashkirko/CS35LProject](url)
 
 ```
 # Connecting to databse
