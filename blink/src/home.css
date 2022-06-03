@@ -401,3 +401,11 @@ tr{
   top:1vh;
   left:2vw;
 }
+.send-icon{
+  cursor:pointer;
+  height: 3vh;
+  position:relative;
+  /* top:2vh; */
+  left:2vw;
+  bottom: -6vh;
+}

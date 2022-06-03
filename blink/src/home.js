@@ -347,7 +347,7 @@ function Home() {
           </div>
         </form>
 
-          <form onSubmit={this.handleSubmit} id="inputForm">
+          {/* <form onSubmit={this.handleSubmit} id="inputForm">
             <label>
               <input
                 class = "login-input"
@@ -359,6 +359,19 @@ function Home() {
               />
               <input id="tweetButton" type="submit" value="Post" />
             </label>
+          </form> */}
+          
+          <form onSubmit={this.handleSubmit}>
+            <div class="bar">
+              <input class="searchbar" 
+              type="text" 
+              id="tweetInput"
+              placeholder="What's on your mind?"
+              value={this.state.value}
+              onChange={this.handleChange}>
+              </input>
+              <input type="image" class="send-icon" src="send-button.png" value="Post"></input>
+            </div>
           </form>
           
           <div>
