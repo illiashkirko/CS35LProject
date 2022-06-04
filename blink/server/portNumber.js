@@ -1,3 +1,3 @@
- const portNumberServer=5085;
+ const portNumberServer=5100;
  exports.portNumberServer = portNumberServer
 
